@@ -5,137 +5,92 @@
 #    pip-compile requirements-dev.in
 #
 -e file:.
-    # via -r requirements.txt
+    # via -r requirements-dev.in
 async-timeout==4.0.3
-    # via
-    #   -r requirements.txt
-    #   redis
+    # via redis
+blinker==1.7.0
+    # via flask
 boto3==1.34.22
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
+    # via ccs-digitalmarketplace-utils
 botocore==1.34.22
     # via
-    #   -r requirements.txt
     #   boto3
     #   s3transfer
 cachelib==0.10.2
-    # via
-    #   -r requirements.txt
-    #   flask-session
+    # via flask-session
 ccs-digitalmarketplace-apiclient==25.0.0
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
-ccs-digitalmarketplace-utils==65.1.0
-    # via
-    #   -r requirements.txt
-    #   sanitized-package
+    # via ccs-digitalmarketplace-utils
+ccs-digitalmarketplace-utils==66.0.0rc1
+    # via ccs-digitalmarketplace-frontend-jinja
 certifi==2023.11.17
-    # via
-    #   -r requirements.txt
-    #   requests
+    # via requests
 cffi==1.16.0
-    # via
-    #   -r requirements.txt
-    #   cryptography
+    # via cryptography
 charset-normalizer==3.3.2
-    # via
-    #   -r requirements.txt
-    #   requests
-click==7.1.2
-    # via
-    #   -r requirements.txt
-    #   flask
+    # via requests
+click==8.1.7
+    # via flask
 contextlib2==21.6.0
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
+    # via ccs-digitalmarketplace-utils
 cryptography==41.0.7
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
+    # via ccs-digitalmarketplace-utils
 defusedxml==0.7.1
-    # via
-    #   -r requirements.txt
-    #   odfpy
+    # via odfpy
 docopt==0.6.2
-    # via
-    #   -r requirements.txt
-    #   notifications-python-client
+    # via notifications-python-client
 exceptiongroup==1.2.0
     # via pytest
 flake8==7.0.0
     # via -r requirements-dev.in
-flask==2.0.3
+flask==2.3.3
     # via
     #   -r requirements-dev.in
-    #   -r requirements.txt
     #   ccs-digitalmarketplace-utils
     #   flask-gzip
     #   flask-login
     #   flask-session
     #   flask-wtf
 flask-gzip==0.2
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
+    # via ccs-digitalmarketplace-utils
 flask-login==0.6.3
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
-flask-session==0.4.1
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
+    # via ccs-digitalmarketplace-utils
+flask-session==0.5.0
+    # via ccs-digitalmarketplace-utils
 flask-wtf==1.2.1
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
+    # via ccs-digitalmarketplace-utils
 fleep==1.0.1
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
+    # via ccs-digitalmarketplace-utils
 govuk-country-register==0.5.0
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
+    # via ccs-digitalmarketplace-utils
 govuk-frontend-jinja==2.8.0
-    # via
-    #   -r requirements.txt
-    #   sanitized-package
+    # via ccs-digitalmarketplace-frontend-jinja
 idna==3.6
-    # via
-    #   -r requirements.txt
-    #   requests
+    # via requests
+importlib-metadata==7.0.1
+    # via flask
 iniconfig==2.0.0
     # via pytest
 itsdangerous==2.1.2
     # via
-    #   -r requirements.txt
     #   flask
     #   flask-wtf
 jinja2==3.1.3
     # via
-    #   -r requirements.txt
+    #   ccs-digitalmarketplace-frontend-jinja
     #   flask
     #   govuk-frontend-jinja
-    #   sanitized-package
 jmespath==1.0.1
     # via
-    #   -r requirements.txt
     #   boto3
     #   botocore
 lxml==5.1.0
     # via -r requirements-dev.in
 mailchimp3==3.0.21
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
+    # via ccs-digitalmarketplace-utils
 markupsafe==2.1.4
     # via
-    #   -r requirements.txt
     #   jinja2
+    #   werkzeug
     #   wtforms
 mccabe==0.7.0
     # via flake8
@@ -144,13 +99,9 @@ mypy==1.8.0
 mypy-extensions==1.0.0
     # via mypy
 notifications-python-client==8.2.0
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
+    # via ccs-digitalmarketplace-utils
 odfpy==1.4.1
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
+    # via ccs-digitalmarketplace-utils
 packaging==23.2
     # via pytest
 pluggy==1.3.0
@@ -158,48 +109,31 @@ pluggy==1.3.0
 pycodestyle==2.11.1
     # via flake8
 pycparser==2.21
-    # via
-    #   -r requirements.txt
-    #   cffi
+    # via cffi
 pyflakes==3.2.0
     # via flake8
 pyjwt==2.8.0
-    # via
-    #   -r requirements.txt
-    #   notifications-python-client
+    # via notifications-python-client
 pytest==8.0.1
     # via -r requirements-dev.in
 python-dateutil==2.8.2
-    # via
-    #   -r requirements.txt
-    #   botocore
+    # via botocore
 python-json-logger==2.0.7
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
+    # via ccs-digitalmarketplace-utils
 pytz==2023.3.post1
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
+    # via ccs-digitalmarketplace-utils
 redis==5.0.1
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
+    # via ccs-digitalmarketplace-utils
 requests==2.31.0
     # via
-    #   -r requirements.txt
     #   ccs-digitalmarketplace-apiclient
     #   ccs-digitalmarketplace-utils
     #   mailchimp3
     #   notifications-python-client
 s3transfer==0.10.0
-    # via
-    #   -r requirements.txt
-    #   boto3
+    # via boto3
 six==1.16.0
-    # via
-    #   -r requirements.txt
-    #   python-dateutil
+    # via python-dateutil
 tomli==2.0.1
     # via
     #   mypy
@@ -207,25 +141,19 @@ tomli==2.0.1
 typing-extensions==4.9.0
     # via mypy
 unicodecsv==0.14.1
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
+    # via ccs-digitalmarketplace-utils
 urllib3==1.26.18
     # via
-    #   -r requirements.txt
     #   botocore
     #   requests
-werkzeug==2.0.3
+werkzeug==2.3.8
     # via
-    #   -r requirements.txt
     #   ccs-digitalmarketplace-utils
     #   flask
     #   flask-login
 workdays==1.4
-    # via
-    #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
+    # via ccs-digitalmarketplace-utils
 wtforms==3.1.2
-    # via
-    #   -r requirements.txt
-    #   flask-wtf
+    # via flask-wtf
+zipp==3.17.0
+    # via importlib-metadata

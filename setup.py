@@ -32,7 +32,7 @@ setup(
     install_requires=[
         'jinja2>3',
         'govuk-frontend-jinja>=2.8.0,<3',
-        'ccs-digitalmarketplace-utils>=65.0.0',
+        'ccs-digitalmarketplace-utils>=66.0.0rc1',
     ],
     python_requires=">=3.9,<3.12",
 )
