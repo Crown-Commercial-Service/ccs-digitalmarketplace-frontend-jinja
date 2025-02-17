@@ -76,7 +76,7 @@ jmespath==1.0.1
     # via
     #   boto3
     #   botocore
-lxml==5.3.0
+lxml==5.3.1
     # via
     #   ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
     #   xmldiff
