@@ -42,7 +42,7 @@
         'one-quarter': 4
       } %}
       <div class="dm-list-multiquestion__items">
-        {% set column_width = params.question.column_width | default('one-half') %}
+        {% set column_width = params.question.column_width or 'one-half' %}
         {% for multi_question in params.question.questions %}
           {% if multi_question.questions -%}
             <div class="dm-list-multiquestion__item govuk-!-margin-bottom-6">
