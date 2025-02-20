@@ -4,6 +4,10 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
+## 3.4.0
+
+Upgrade Digital Marketplace Frontend to v2.4.0
+
 ## 3.3.2
 
 Fix issue with column width in list multiquestion
