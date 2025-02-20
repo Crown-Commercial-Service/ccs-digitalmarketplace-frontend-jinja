@@ -80,7 +80,7 @@
   class="govuk-visually-hidden"
   id="{{ params.question.id }}"
 >
-  {% if params.type in ['text', 'number', 'textbox_large', 'radios', 'boolean', 'select'] %}
+  {% if params.type in ['text', 'number', 'textbox_large', 'radios', 'boolean', 'upload', 'select'] %}
     {{ digitalmarketplaceQuestionTextHidden(params) }}
   {% elif params.type == 'pricing' %}
     {{ digitalmarketplaceQuestionPricingHidden(params) }}
