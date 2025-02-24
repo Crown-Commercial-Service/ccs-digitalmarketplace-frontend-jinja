@@ -7,6 +7,7 @@
 {%- from "digitalmarketplace_frontend_jinja/components/question-format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
 
 {% set name = params.question.id %}
+{% set numberOfItems = params.question.number_of_items if params.question.number_of_items else 10 %}
 {% set errorMessage = params.errors[name] if params.errors %}
 {% set values = params.data[name] or [] if params.data else [] %}
 {% set questionText = params.question.question + " (optional)" if params.question.optional else params.question.question %}
@@ -31,7 +32,8 @@
     "classes": 'dm-list',
     "attributes": {
       'data-module': "dm-question-list",
-      'aria-describedby': describedBy if describedBy
+      'aria-describedby': describedBy if describedBy,
+      'data-max-number-of-items': numberOfItems
     }
   }) %}
     {% if hintHtml %}
@@ -49,7 +51,7 @@
     {% endif %}
 
     <div class="dm-list__items">
-      {% for index in range(0, 10) %}
+      {% for index in range(0, numberOfItems) %}
         <div class="govuk-grid-row dm-list__item">
           <div class="dm-list__item-input-column">
             {{ govukInput({
