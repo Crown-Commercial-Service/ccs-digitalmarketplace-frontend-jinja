@@ -8,6 +8,7 @@
 
 {% set name = params.question.id %}
 {% set numberOfItems = params.question.number_of_items if params.question.number_of_items else 10 %}
+{% set numberOfItemsShownAsDefault = params.question.number_of_items_shown_as_default if params.question.number_of_items_shown_as_default else 2 %}
 {% set errorMessage = params.errors[name] if params.errors %}
 {% set values = params.data[name] or [] if params.data else [] %}
 {% set questionText = params.question.question + " (optional)" if params.question.optional else params.question.question %}
@@ -34,6 +35,7 @@
       'data-module': "dm-question-list",
       'aria-describedby': describedBy if describedBy,
       'data-max-number-of-items': numberOfItems
+      'data-number-of-items-shown-as-default': numberOfItemsShownAsDefault,
     }
   }) %}
     {% if hintHtml %}
