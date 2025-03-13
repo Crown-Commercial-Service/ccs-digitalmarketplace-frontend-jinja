@@ -158,17 +158,35 @@
                 <div class="govuk-grid-row">
                   <div class="govuk-grid-column-two-thirds">
                     <div class="govuk-button-group">
-                      {{ govukButton({
-                        "html": 'Edit item <span class="govuk-visually-hidden">{}</span>'.format(index + 1),
-                        "classes": 'govuk-button--secondary dm-list-multiquestion__item-edit',
-                        "href": url_for(params.server_side_options.add_endpoint, item_number=index, question_id=params.question.id, **params.server_side_options.endpoint_values)
-                      })}}
-                      {% if number_of_items_added > 1 %}
+                      {% if params.server_side_options.submit %}
                         {{ govukButton({
-                          "html": 'Remove item <span class="govuk-visually-hidden">{}</span>'.format(index + 1),
-                          "classes": 'govuk-button--warning dm-list-multiquestion__item-remove',
-                          "href": url_for(params.server_side_options.remove_endpoint, item_number=index, question_id=params.question.id, **params.server_side_options.endpoint_values)
+                          "html": 'Edit item <span class="govuk-visually-hidden">{}</span>'.format(index + 1),
+                          "classes": 'govuk-button--secondary dm-list-multiquestion__item-edit',
+                          "name": 'edit-list-multiquestion',
+                          "value": "{}:{}".format(params.question.id, index)
                         }) }}
+                      {% else %}
+                        {{ govukButton({
+                          "html": 'Edit item <span class="govuk-visually-hidden">{}</span>'.format(index + 1),
+                          "classes": 'govuk-button--secondary dm-list-multiquestion__item-edit',
+                          "href": url_for(params.server_side_options.add_endpoint, item_number=index, question_id=params.question.id, **params.server_side_options.endpoint_values)
+                        }) }}
+                      {% endif %}
+                      {% if number_of_items_added > 1 %}
+                        {% if params.server_side_options.submit %}
+                          {{ govukButton({
+                            "html": 'Remove item <span class="govuk-visually-hidden">{}</span>'.format(index + 1),
+                            "classes": 'govuk-button--warning dm-list-multiquestion__item-remove',
+                            "name": 'remove-list-multiquestion',
+                            "value": "{}:{}".format(params.question.id, index)
+                          }) }}
+                        {% else %}
+                          {{ govukButton({
+                            "html": 'Remove item <span class="govuk-visually-hidden">{}</span>'.format(index + 1),
+                            "classes": 'govuk-button--warning dm-list-multiquestion__item-remove',
+                            "href": url_for(params.server_side_options.remove_endpoint, item_number=index, question_id=params.question.id, **params.server_side_options.endpoint_values)
+                          }) }}
+                        {% endif %}
                       {% endif %}
                     </div>
                   </div>
@@ -188,11 +206,20 @@
       {% if number_of_items_added < params.question.number_of_items %}
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-full">
-            {{ govukButton({
-              "html": 'Add item ({} remaining)'.format(params.question.number_of_items - number_of_items_added),
-              "classes": 'govuk-button--secondary dm-list-multiquestion__item-add',
-              "href": url_for(params.server_side_options.add_endpoint, item_number=number_of_items_added, question_id=params.question.id, **params.server_side_options.endpoint_values)
-            })}}
+            {% if params.server_side_options.submit %}
+              {{ govukButton({
+                "html": 'Add item ({} remaining)'.format(params.question.number_of_items - number_of_items_added),
+                "classes": 'govuk-button--secondary dm-list-multiquestion__item-add',
+                "name": 'add-list-multiquestion',
+                "value": "{}:{}".format(params.question.id, number_of_items_added)
+              }) }}
+            {% else %}
+              {{ govukButton({
+                "html": 'Add item ({} remaining)'.format(params.question.number_of_items - number_of_items_added),
+                "classes": 'govuk-button--secondary dm-list-multiquestion__item-add',
+                "href": url_for(params.server_side_options.add_endpoint, item_number=number_of_items_added, question_id=params.question.id, **params.server_side_options.endpoint_values)
+              }) }}
+            {% endif %}
           </div>
         </div>
       {% endif %}

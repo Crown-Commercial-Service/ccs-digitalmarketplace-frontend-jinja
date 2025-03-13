@@ -4,17 +4,24 @@
 
 {%- from "digitalmarketplace_frontend_jinja/components/compliance-communication-attachment-row/macro.html" import digitalmarketplaceComplianceCommunicationAttachmentRow -%}
 
+{% set number_of_attachments = params.number_of_attachments or 3 %}
+
 {% call govukFieldset({
   "legend": {
     "text": "Add an attachment",
     "classes": "govuk-fieldset__legend--m"
   },
   "attributes": {
-    "data-module": "dm-compliance-communication-attachments"
+    "data-module": "dm-compliance-communication-attachments",
+    "data-max-number-of-attachments": number_of_attachments
   }
 }) %}
   <p class="govuk-caption-m">
-    You can add up to 3 attachments
+    {% if params.hint %}
+      {{ params.hint.html | safe | trim | indent(2) if params.hint.html else params.hint.text }}
+    {% else %}
+      You can add up to {{ number_of_attachments }} attachments
+    {% endif %}
   </p>
 
   <div class="govuk-visually-hidden dm-compliance-communication__attachments-item-template">
@@ -37,7 +44,7 @@
   </div>
 
   <div class="dm-compliance-communication__attachments-items">
-    {% for index in range(3) %}
+    {% for index in range(number_of_attachments) %}
       {{ digitalmarketplaceComplianceCommunicationAttachmentRow({
         "form": params.form,
         "index": index
