@@ -14,6 +14,7 @@
 {% set _ = params.__setitem__("value", params.form.data) if params.form.data %}
 {% set _ = params.__setitem__("hint", { "text": params.form.hint }) if params.form.hint and "hint" not in params %}
 {% set _ = params.__setitem__("errorMessage", { "text": params.form.errors[0] }) if params.form.errors %}
+{% set _ = params.__setitem__("javascript", true) %}
 
 {{ govukFileUpload(params) }}
 {% endmacro %}

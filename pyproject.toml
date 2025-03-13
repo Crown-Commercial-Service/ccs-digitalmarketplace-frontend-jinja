@@ -7,7 +7,7 @@ name = "ccs-digitalmarketplace-frontend-jinja"
 dynamic = ["version"]
 dependencies = [
   'jinja2>3',
-  'ccs-govuk-frontend-jinja>=1.4,<2',
+  'ccs-govuk-frontend-jinja>=1.5,<2',
   'ccs-digitalmarketplace-utils>=69.0.0',
 ]
 requires-python = ">=3.11,<3.14"
