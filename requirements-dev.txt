@@ -14,9 +14,9 @@ botocore==1.37.18
     #   s3transfer
 cachelib==0.13.0
     # via flask-session
-ccs-digitalmarketplace-apiclient==32.0.0
+ccs-digitalmarketplace-apiclient==32.2.1
     # via ccs-digitalmarketplace-utils
-ccs-digitalmarketplace-utils==73.0.1
+ccs-digitalmarketplace-utils==74.1.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
 ccs-govuk-frontend-jinja==1.5.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
