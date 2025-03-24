@@ -160,14 +160,14 @@
                     <div class="govuk-button-group">
                       {% if params.server_side_options.submit %}
                         {{ govukButton({
-                          "html": 'Edit item <span class="govuk-visually-hidden">{}</span>'.format(index + 1),
+                          "html": 'Edit<span class="govuk-visually-hidden"> item {}</span>'.format(index + 1),
                           "classes": 'govuk-button--secondary dm-list-multiquestion__item-edit',
                           "name": 'edit-list-multiquestion',
                           "value": "{}:{}".format(params.question.id, index)
                         }) }}
                       {% else %}
                         {{ govukButton({
-                          "html": 'Edit item <span class="govuk-visually-hidden">{}</span>'.format(index + 1),
+                          "html": 'Edit<span class="govuk-visually-hidden"> item {}</span>'.format(index + 1),
                           "classes": 'govuk-button--secondary dm-list-multiquestion__item-edit',
                           "href": url_for(params.server_side_options.add_endpoint, item_number=index, question_id=params.question.id, **params.server_side_options.endpoint_values)
                         }) }}
