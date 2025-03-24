@@ -86,7 +86,7 @@
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-full">
           {{ govukButton({
-              "html": 'Remove <span class="govuk-visually-hidden"><span class="dm-list-multiquestion__item-remove-counter">0</span></span>',
+              "html": 'Remove<span class="govuk-visually-hidden"> item <span class="dm-list-multiquestion__item-remove-counter">0</span></span>',
               "classes": 'govuk-button--secondary dm-list-multiquestion__item-remove govuk-visually-hidden',
               "type": 'button'
             })}}
@@ -175,14 +175,14 @@
                       {% if number_of_items_added > 1 %}
                         {% if params.server_side_options.submit %}
                           {{ govukButton({
-                            "html": 'Remove <span class="govuk-visually-hidden">{}</span>'.format(index + 1),
+                            "html": 'Remove<span class="govuk-visually-hidden"> item {}</span>'.format(index + 1),
                             "classes": 'govuk-button--warning dm-list-multiquestion__item-remove',
                             "name": 'remove-list-multiquestion',
                             "value": "{}:{}".format(params.question.id, index)
                           }) }}
                         {% else %}
                           {{ govukButton({
-                            "html": 'Remove <span class="govuk-visually-hidden">{}</span>'.format(index + 1),
+                            "html": 'Remove<span class="govuk-visually-hidden"> item {}</span>'.format(index + 1),
                             "classes": 'govuk-button--warning dm-list-multiquestion__item-remove',
                             "href": url_for(params.server_side_options.remove_endpoint, item_number=index, question_id=params.question.id, **params.server_side_options.endpoint_values)
                           }) }}
