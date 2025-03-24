@@ -86,7 +86,7 @@
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-full">
           {{ govukButton({
-              "html": 'item <span class="govuk-visually-hidden"><span class="dm-list-multiquestion__item-remove-counter">0</span></span>',
+              "html": 'Remove <span class="govuk-visually-hidden"><span class="dm-list-multiquestion__item-remove-counter">0</span></span>',
               "classes": 'govuk-button--secondary dm-list-multiquestion__item-remove govuk-visually-hidden',
               "type": 'button'
             })}}
@@ -96,7 +96,7 @@
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-full">
           {{ govukButton({
-            "html": 'item (<span class="dm-list-multiquestion__item-add-counter">0</span> remaining)',
+            "html": 'Add (<span class="dm-list-multiquestion__item-add-counter">0</span> remaining)',
             "classes": 'govuk-button--secondary dm-list-multiquestion__item-add govuk-visually-hidden',
             "type": 'button'
           })}}
@@ -175,14 +175,14 @@
                       {% if number_of_items_added > 1 %}
                         {% if params.server_side_options.submit %}
                           {{ govukButton({
-                            "html": 'item <span class="govuk-visually-hidden">{}</span>'.format(index + 1),
+                            "html": 'Remove <span class="govuk-visually-hidden">{}</span>'.format(index + 1),
                             "classes": 'govuk-button--warning dm-list-multiquestion__item-remove',
                             "name": 'remove-list-multiquestion',
                             "value": "{}:{}".format(params.question.id, index)
                           }) }}
                         {% else %}
                           {{ govukButton({
-                            "html": 'item <span class="govuk-visually-hidden">{}</span>'.format(index + 1),
+                            "html": 'Remove <span class="govuk-visually-hidden">{}</span>'.format(index + 1),
                             "classes": 'govuk-button--warning dm-list-multiquestion__item-remove',
                             "href": url_for(params.server_side_options.remove_endpoint, item_number=index, question_id=params.question.id, **params.server_side_options.endpoint_values)
                           }) }}
@@ -208,14 +208,14 @@
           <div class="govuk-grid-column-full">
             {% if params.server_side_options.submit %}
               {{ govukButton({
-                "html": 'item ({} remaining)'.format(params.question.number_of_items - number_of_items_added),
+                "html": 'Add ({} remaining)'.format(params.question.number_of_items - number_of_items_added),
                 "classes": 'govuk-button--secondary dm-list-multiquestion__item-add',
                 "name": 'add-list-multiquestion',
                 "value": "{}:{}".format(params.question.id, number_of_items_added)
               }) }}
             {% else %}
               {{ govukButton({
-                "html": 'item ({} remaining)'.format(params.question.number_of_items - number_of_items_added),
+                "html": 'Add ({} remaining)'.format(params.question.number_of_items - number_of_items_added),
                 "classes": 'govuk-button--secondary dm-list-multiquestion__item-add',
                 "href": url_for(params.server_side_options.add_endpoint, item_number=number_of_items_added, question_id=params.question.id, **params.server_side_options.endpoint_values)
               }) }}
