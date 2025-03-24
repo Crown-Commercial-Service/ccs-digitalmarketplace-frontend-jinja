@@ -4,6 +4,11 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
+## 3.7.1
+
+Removed the word item from the text of the buttons in list multiquestion
+Fix issue where the date value would not appear for the date question if the date was in parts
+
 ## 3.7.0
 
 Upgrade Digital Marketplace Frontend to v2.8.1

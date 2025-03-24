@@ -30,7 +30,7 @@
   {% set _items = items.append({
     "classes": "govuk-input--width-" + fieldLength + (" govuk-input--error" if errorMessage else ""),
     "name": fieldName,
-    "value": dateParts[loop.index - 1] if dateParts
+    "value": dateParts[loop.index - 1] if dateParts else params.data[name + "-" + fieldName]
   }) %}
 {% endfor %}
 
