@@ -4,7 +4,7 @@
 
 {%- from "digitalmarketplace_frontend_jinja/components/compliance-communication-attachment-row/macro.html" import digitalmarketplaceComplianceCommunicationAttachmentRow -%}
 
-{% set number_of_attachments = params.number_of_attachments or 3 %}
+{% set number_of_attachments = params.form.attachments | length %}
 
 {% call govukFieldset({
   "legend": {
@@ -16,27 +16,28 @@
     "data-max-number-of-attachments": number_of_attachments
   }
 }) %}
-  <p class="govuk-caption-m">
+  <div class="dm-compliance-communication-attachments--hint">
     {% if params.hint %}
       {{ params.hint.html | safe | trim | indent(2) if params.hint.html else params.hint.text }}
     {% else %}
-      You can add up to {{ number_of_attachments }} attachments
+      <p class="govuk-caption-m">You can add up to {{ number_of_attachments }} attachments</p>
     {% endif %}
-  </p>
+  </div>
 
   <div class="govuk-visually-hidden dm-compliance-communication__attachments-item-template">
     {{ digitalmarketplaceComplianceCommunicationAttachmentRow({
-      "form": {
-        "attachment_file_99": {
-          "name": "attachment_file_99",
-          "question": params.form.attachment_file_0.question,
-          "hint": params.form.attachment_file_0.hint
+      "attachment": {
+        "file": {
+          "name": "attachments-99-file",
+          "question": params.form.attachments[0].file.question,
+          "hint": params.form.attachments[0].file.hint
         },
-        "attachment_required_99": {
-          "name": "attachment_required_99",
-          "question": params.form.attachment_required_0.question,
+        "required": {
+          "name": "attachments-99-required",
+          "question": params.form.attachments[0].required.question,
           "data": None
-        }
+        },
+        "hidden_tag": params.form.attachments[0].hidden_tag
       },
       "index": 99,
       "template": True
@@ -44,10 +45,10 @@
   </div>
 
   <div class="dm-compliance-communication__attachments-items">
-    {% for index in range(number_of_attachments) %}
+    {% for attachment in params.form.attachments %}
       {{ digitalmarketplaceComplianceCommunicationAttachmentRow({
-        "form": params.form,
-        "index": index
+        "attachment": attachment,
+        "index": loop.index - 1
       }) }}
     {% endfor %}
   </div>

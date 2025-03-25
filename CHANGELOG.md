@@ -4,6 +4,11 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
+## 4.0.0
+
+Upgrade Digital Marketplace Frontend to v3.0.0
+This includes a breaking change to compliance communication attachments
+
 ## 3.7.3
 
 Upgrade Digital Marketplace Frontend to v2.8.3

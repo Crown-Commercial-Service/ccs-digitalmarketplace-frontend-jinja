@@ -6,6 +6,8 @@ from typing import Any
 
 from flask import Flask, render_template_string, render_template, request, Blueprint
 from jinja2 import ChoiceLoader, PackageLoader, FileSystemLoader, PrefixLoader
+from jinja2.runtime import Macro
+from markupsafe import Markup
 
 from dmutils.external import external as external_blueprint
 from dmutils.formats import datetimeformat
@@ -15,6 +17,42 @@ def parse_document_upload_time(data):
     match = re.search(r"(\d{4}-\d{2}-\d{2}-\d{2}\d{2})\..{2,3}$", data)
     if match:
         return datetime.strptime(match.group(1), "%Y-%m-%d-%H%M")
+
+
+# This is needed because of compliance communications attachments
+# When really in use the form field will have the hidden_tag method
+class hidden_tag_dict(dict):
+    def hidden_tag(self):
+        return Markup(
+            f'<input type="hidden" name="{self["file"]["name"].replace("file", "hidden_tag")}" value="hidden-tag">'
+        )
+
+
+def transform_dict_to_hidden_tag_dict(obj):
+    return hidden_tag_dict(**{
+        key: transform_dict_to_hidden_tag_dict(value) if isinstance(value, dict) else value
+        for key, value in obj.items()
+    })
+
+
+def _invoke(self, arguments, autoescape):
+    if self._environment.is_async:
+        return self._async_invoke(arguments, autoescape)
+
+    arguments = [
+        transform_dict_to_hidden_tag_dict(argument)if isinstance(argument, dict) else argument
+        for argument in arguments
+    ]
+
+    rv = self._func(*arguments)
+
+    if autoescape:
+        rv = Markup(rv)
+
+    return rv
+
+
+Macro._invoke = _invoke  # type: ignore
 
 
 def create_app():
