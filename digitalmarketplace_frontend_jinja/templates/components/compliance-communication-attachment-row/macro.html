@@ -14,13 +14,15 @@
   },
   "classes": "dm-compliance-communication__attachments-item"
 }) %}
+  {{ params.attachment.hidden_tag() }}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
       {{ digitalmarketplaceFileUploadFromForm({
-        "form": params.form["attachment_file_{}".format(params.index)],
+        "form": params.attachment.file,
         "classes": "dm-compliance-communication__attachments-item-file",
         "hint": {
-          "html": params.form["attachment_file_{}".format(params.index)].hint
+          "html": params.attachment.file.hint
         },
         "attributes": {
           "tabindex": "-1"
@@ -37,7 +39,7 @@
         }
       }) }}
       {{ digitalmarketplaceCheckboxesFromForm({
-        "form": params.form["attachment_required_{}".format(params.index)],
+        "form": params.attachment.required,
         "fieldset": {
           "legend": {
             "classes": " "
@@ -46,9 +48,9 @@
         },
         "items": [
           {
-            "text": params.form["attachment_required_{}".format(params.index)].question,
+            "text": params.attachment.required.question,
             "value": true,
-            "checked": params.form["attachment_required_{}".format(params.index)].data | lower == 'true',
+            "checked": params.attachment.required.data | lower == 'true',
             "attributes": {
               "tabindex": "-1"
             } if params.template
