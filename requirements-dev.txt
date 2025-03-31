@@ -6,9 +6,9 @@
 #
 blinker==1.9.0
     # via flask
-boto3==1.37.18
+boto3==1.37.23
     # via ccs-digitalmarketplace-utils
-botocore==1.37.18
+botocore==1.37.23
     # via
     #   boto3
     #   s3transfer
