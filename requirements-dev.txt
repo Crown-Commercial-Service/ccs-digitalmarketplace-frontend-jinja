@@ -131,7 +131,7 @@ python-dateutil==2.9.0.post0
     # via botocore
 python-json-logger==3.3.0
     # via ccs-digitalmarketplace-utils
-pytz==2025.1
+pytz==2025.2
     # via ccs-digitalmarketplace-utils
 pyyaml==6.0.2
     # via pre-commit
