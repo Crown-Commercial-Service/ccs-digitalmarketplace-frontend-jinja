@@ -9,6 +9,7 @@
   {% set hintHtml %}
     {{ digitalmarketplaceQuestionFormatHint(params.question) }}
     {% if value %}
+      <input type="hidden" id="input-{{ name }}-upload" name="{{ name }}-upload" value="{{ value }}">
       <ul class="dm-document-upload-list">
         <li class="dm-document-list-item">
           <span class="dm-document-upload-with-icon">

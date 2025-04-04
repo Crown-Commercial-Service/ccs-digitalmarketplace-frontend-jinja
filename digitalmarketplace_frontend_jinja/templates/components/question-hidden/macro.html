@@ -7,6 +7,12 @@
   <input type="hidden" id="input-{{ name }}" name="{{ name }}" value="{{ value }}">
 {% endmacro %}
 
+{% macro digitalmarketplaceQuestionUploadHidden(params) %}
+  {% set name = params.question.id %}
+  {% set value = params.data[name] if params.data and params.data[name] is not none %}
+  <input type="hidden" id="input-{{ name }}-upload" name="{{ name }}-upload" value="{{ value }}">
+{% endmacro %}
+
 {% macro digitalmarketplaceQuestionPricingHidden(params) %}
   {% set price = params.question.fields.price %}
   {% set minimumPrice = params.question.fields.minimum_price %}
@@ -80,8 +86,10 @@
   class="govuk-visually-hidden"
   id="{{ params.question.id }}"
 >
-  {% if params.type in ['text', 'number', 'textbox_large', 'radios', 'boolean', 'upload', 'select'] %}
+  {% if params.type in ['text', 'number', 'textbox_large', 'radios', 'boolean', 'select'] %}
     {{ digitalmarketplaceQuestionTextHidden(params) }}
+  {% elif params.type == 'upload' %}
+    {{ digitalmarketplaceQuestionUploadHidden(params) }}
   {% elif params.type == 'pricing' %}
     {{ digitalmarketplaceQuestionPricingHidden(params) }}
   {% elif params.type == 'date' %}
