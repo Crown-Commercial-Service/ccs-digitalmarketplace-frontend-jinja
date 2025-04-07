@@ -20,7 +20,8 @@
       },
       "attributes": {
         'data-module': "dm-question-list-multiquestion",
-        'data-max-number-of-items': params.question.number_of_items
+        'data-max-number-of-items': params.question.number_of_items,
+        'id': "input-{}".format(name)
       }
     }) %}
       {% if params.question.question_advice %}
@@ -117,6 +118,9 @@
       "legend": {
         "text": params.question.question,
         "classes": 'govuk-fieldset__legend--m'
+      },
+      "attributes": {
+        'id': "input-{}".format(name)
       }
     }) %}
       {% if params.question.question_advice %}
