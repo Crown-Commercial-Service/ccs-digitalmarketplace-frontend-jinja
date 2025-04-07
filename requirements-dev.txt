@@ -6,17 +6,17 @@
 #
 blinker==1.9.0
     # via flask
-boto3==1.37.23
+boto3==1.37.28
     # via ccs-digitalmarketplace-utils
-botocore==1.37.23
+botocore==1.37.28
     # via
     #   boto3
     #   s3transfer
 cachelib==0.13.0
     # via flask-session
-ccs-digitalmarketplace-apiclient==32.2.3
+ccs-digitalmarketplace-apiclient==32.5.0
     # via ccs-digitalmarketplace-utils
-ccs-digitalmarketplace-utils==75.0.0
+ccs-digitalmarketplace-utils==75.1.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
 ccs-govuk-frontend-jinja==1.5.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
@@ -84,7 +84,7 @@ jmespath==1.0.1
     # via
     #   boto3
     #   botocore
-lxml==5.3.1
+lxml==5.3.2
     # via
     #   ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
     #   xmldiff
@@ -121,7 +121,7 @@ pycodestyle==2.13.0
     # via flake8
 pycparser==2.22
     # via cffi
-pyflakes==3.3.1
+pyflakes==3.3.2
     # via flake8
 pyjwt==2.10.1
     # via notifications-python-client
@@ -147,7 +147,7 @@ s3transfer==0.11.4
     # via boto3
 six==1.17.0
     # via python-dateutil
-typing-extensions==4.12.2
+typing-extensions==4.13.1
     # via mypy
 unicodecsv==0.14.1
     # via ccs-digitalmarketplace-utils
@@ -156,7 +156,7 @@ urllib3==2.3.0
     #   botocore
     #   ccs-digitalmarketplace-utils
     #   requests
-virtualenv==20.29.3
+virtualenv==20.30.0
     # via pre-commit
 werkzeug==3.1.3
     # via
