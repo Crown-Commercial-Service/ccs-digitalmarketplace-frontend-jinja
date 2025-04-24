@@ -109,7 +109,7 @@ notifications-python-client==10.0.1
     # via ccs-digitalmarketplace-utils
 odfpy==1.4.1
     # via ccs-digitalmarketplace-utils
-packaging==24.2
+packaging==25.0
     # via pytest
 platformdirs==4.3.7
     # via virtualenv
