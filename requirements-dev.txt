@@ -147,7 +147,7 @@ s3transfer==0.12.0
     # via boto3
 six==1.17.0
     # via python-dateutil
-typing-extensions==4.13.1
+typing-extensions==4.13.2
     # via mypy
 unicodecsv==0.14.1
     # via ccs-digitalmarketplace-utils
