@@ -2,6 +2,7 @@
 {%- from "govuk_frontend_jinja/components/input/macro.html" import govukInput -%}
 
 {% set name = params.question.id %}
+{% set questionText = params.question.question + " ({})".format(params.question.optional_text if params.question.optional_text else "optional") if params.question.optional else params.question.question %}
 {% set errorMessage = params.errors[name]["message"] if params.errors and params.errors[name] %}
 {% set hint = params.question.hint %}
 
@@ -31,7 +32,7 @@
   "id": "input-" + name,
   "classes": 'govuk-input--width-5',
   "label": {
-    "html": params.question.question,
+    "html": questionText,
     "classes": "govuk-label--m"
   },
   "formGroup": {

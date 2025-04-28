@@ -3,6 +3,7 @@
 {%- from "digitalmarketplace_frontend_jinja/components/question-format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
 
 {% set name = params.question.id %}
+{% set questionText = params.question.question + " ({})".format(params.question.optional_text if params.question.optional_text else "optional") if params.question.optional else params.question.question %}
 
 {% set items = [] %}
 {% set valueToQuestions = {} %}
@@ -58,7 +59,7 @@
   "idPrefix": "input-" + name,
   "fieldset": {
     "legend": {
-      "html": params.question.question,
+      "html": questionText,
       "classes": "govuk-fieldset__legend--m"
     }
   },

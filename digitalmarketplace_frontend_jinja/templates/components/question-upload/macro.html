@@ -3,6 +3,7 @@
 {%- from "digitalmarketplace_frontend_jinja/components/question-format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
 
 {% set name = params.question.id %}
+{% set questionText = params.question.question + " ({})".format(params.question.optional_text if params.question.optional_text else "optional") if params.question.optional else params.question.question %}
 {% set value = params.data[name] if params.data %}
 
 {% if params.question.hint or params.question.question_advice or value %}
@@ -37,7 +38,7 @@
   "name": name,
   "id": "input-" + name,
   "label": {
-    "html": params.question.question,
+    "html": questionText,
     'classes': "govuk-label--m"
   },
   "formGroup": {
