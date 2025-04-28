@@ -11,7 +11,7 @@
 {% set numberOfItemsShownAsDefault = params.question.number_of_items_shown_as_default if params.question.number_of_items_shown_as_default else 2 %}
 {% set errorMessage = params.errors[name] if params.errors %}
 {% set values = params.data[name] or [] if params.data else [] %}
-{% set questionText = params.question.question + " (optional)" if params.question.optional else params.question.question %}
+{% set questionText = params.question.question + " ({})".format(params.question.optional_text if params.question.optional_text else "optional") if params.question.optional else params.question.question %}
 {% set hintHtml = digitalmarketplaceQuestionFormatHint(params.question) if params.question.hint or params.question.question_advice %}
 
 {% set describedBy = "" %}

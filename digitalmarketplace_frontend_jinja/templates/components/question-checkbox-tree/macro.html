@@ -5,13 +5,14 @@
 {%- from "govuk_frontend_jinja/components/error-message/macro.html" import govukErrorMessage -%}
 
 {% set name = params.question.id %}
+{% set questionText = params.question.question + " ({})".format(params.question.optional_text if params.question.optional_text else "optional") if params.question.optional else params.question.question %}
 {% set errorMessage = params.errors[name] if params.errors %}
 {% set values = params.data[name] or [] if params.data else [] %}
 
 <div class="govuk-form-group {%- if errorMessage %} govuk-form-group--error{% endif %}">
   {% call govukFieldset({
     "legend": {
-      "html": params.question.question,
+      "html": questionText,
       "classes": "govuk-fieldset__legend--m"
     },
     "classes": 'dm-checkbox-tree',
@@ -51,7 +52,7 @@
                 "checked": label.label in values
               }) %}
             {% endfor %}
-            
+
             {% set summaryHtml %}
               {{ option.options | length }} categories<span class="dm-checkbox-tree__options-number-selected"></span>
             {% endset %}

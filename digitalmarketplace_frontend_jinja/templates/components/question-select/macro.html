@@ -5,7 +5,7 @@
 {% set name = params.question.id %}
 {% set items = [] %}
 {% set default_option =  params.question.default_option | default({})%}
-{% set questionText = params.question.question + " (optional)" if params.question.optional else params.question.question %}
+{% set questionText = params.question.question + " ({})".format(params.question.optional_text if params.question.optional_text else "optional") if params.question.optional else params.question.question %}
 
 {% if params.errors and params.errors[name] %}
   {% set errorMessage = { "text": params.errors[name]["message"] } %}
