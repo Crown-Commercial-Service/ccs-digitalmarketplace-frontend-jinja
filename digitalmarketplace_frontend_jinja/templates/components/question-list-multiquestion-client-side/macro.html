@@ -1,0 +1,104 @@
+{% macro digitalmarketplaceQuestionListMultiquestionClientSide(params) %}
+{%- from "govuk_frontend_jinja/components/fieldset/macro.html" import govukFieldset -%}
+{%- from "govuk_frontend_jinja/components/button/macro.html" import govukButton -%}
+{%- from "govuk_frontend_jinja/components/error-message/macro.html" import govukErrorMessage -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macro.html" import digitalmarketplaceQuestion -%}
+
+{% set name = params.question.id %}
+{% if params.errors and params.errors[name] %}
+  {% set errorMessage = { "text": params.errors[name]["message"] } %}
+{% endif %}
+<div class="govuk-form-group {%- if errorMessage %} govuk-form-group--error{% endif %}">
+  {% call govukFieldset({
+    "legend": {
+      "text": params.question.question,
+      "classes": 'govuk-fieldset__legend--m'
+    },
+    "attributes": {
+      'data-module': "dm-question-list-multiquestion-client-side",
+      'data-max-number-of-items': params.question.number_of_items,
+      'id': "input-{}".format(name)
+    }
+  }) %}
+    {% if params.question.question_advice %}
+      <div class="govuk-body">
+        {{ params.question.question_advice | safe }}
+      </div>
+    {% endif %}
+    {% if errorMessage %}
+      {{ govukErrorMessage({
+        "id": "input-" + name + "-error",
+        "text": errorMessage.text
+      }) | trim | indent(2) }}
+    {% endif %}
+
+    {% set column_width_to_number_for_wrap = {
+      'full': 1,
+      'one-half': 2,
+      'one-third': 3,
+      'one-quarter': 4
+    } %}
+    <div class="dm-list-multiquestion__items">
+      {% set column_width = params.question.column_width or 'one-half' %}
+      {% for multi_question in params.question.questions %}
+        {% if multi_question.questions -%}
+          <div class="dm-list-multiquestion__item govuk-!-margin-bottom-6">
+            {% call govukFieldset({
+              "legend": {
+                "text": multi_question.question,
+                "classes": 'govuk-fieldset__legend--m'
+              }
+            }) %}
+              {% if multi_question.question_advice %}
+                <div class="govuk-body">
+                  {{ multi_question.question_advice | safe }}
+                </div>
+              {% endif %}
+
+              {% for question in multi_question.questions %}
+                {% set index = loop.index - 1 %}
+                {% if index % column_width_to_number_for_wrap[column_width] == 0 %}
+                  <div class="govuk-grid-row govuk-!-margin-bottom-2">
+                {% endif %}
+                <div class="dm-multiquestion__item-input-column govuk-grid-column-{{ column_width }}">
+                  {{ digitalmarketplaceQuestion({
+                    "type": question.type,
+                    "question": question,
+                    "data": params.data,
+                    "errors": params.errors,
+                    "frameworkReusedFrom": params.frameworkReusedFrom,
+                    "list_multi_question_index": index
+                  }) }}
+                </div>
+                {% if index % column_width_to_number_for_wrap[column_width] == column_width_to_number_for_wrap[column_width] - 1 %}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            {% endcall %}
+          </div>
+        {%- endif %}
+      {% endfor %}
+    </div>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+        {{ govukButton({
+            "html": 'Remove<span class="govuk-visually-hidden"> item <span class="dm-list-multiquestion__item-remove-counter">0</span></span>',
+            "classes": 'govuk-button--secondary dm-list-multiquestion__item-remove govuk-visually-hidden',
+            "type": 'button'
+          })}}
+      </div>
+    </div>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+        {{ govukButton({
+          "html": 'Add (<span class="dm-list-multiquestion__item-add-counter">0</span> remaining)',
+          "classes": 'govuk-button--secondary dm-list-multiquestion__item-add govuk-visually-hidden',
+          "type": 'button'
+        })}}
+      </div>
+    </div>
+  {% endcall %}
+</div>
+{% endmacro %}
