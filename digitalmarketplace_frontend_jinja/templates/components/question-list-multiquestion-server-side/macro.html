@@ -1,0 +1,135 @@
+{% macro digitalmarketplaceQuestionListMultiquestionServerSide(params) %}
+{%- from "govuk_frontend_jinja/components/fieldset/macro.html" import govukFieldset -%}
+{%- from "govuk_frontend_jinja/components/button/macro.html" import govukButton -%}
+{%- from "govuk_frontend_jinja/components/error-message/macro.html" import govukErrorMessage -%}
+{%- from "govuk_frontend_jinja/components/details/macro.html" import govukDetails -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macro.html" import digitalmarketplaceQuestion -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question-hidden/macro.html" import digitalmarketplaceQuestionHidden -%}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content/macro.html" import digitalmarketplaceSummaryContent -%}
+
+{% set name = params.question.id %}
+{% if params.errors and params.errors[name] %}
+  {% set errorMessage = { "text": params.errors[name]["message"] } %}
+{% endif %}
+
+<div class="govuk-form-group {%- if errorMessage %} govuk-form-group--error{% endif %}">
+  {% call govukFieldset({
+    "legend": {
+      "text": params.question.question,
+      "classes": 'govuk-fieldset__legend--m'
+    },
+    "attributes": {
+      'id': "input-{}".format(name)
+    }
+  }) %}
+    {% if params.question.question_advice %}
+      <div class="govuk-body">
+        {{ params.question.question_advice | safe }}
+      </div>
+    {% endif %}
+    {% if errorMessage %}
+      {{ govukErrorMessage({
+        "id": "input-" + name + "-error",
+        "text": errorMessage.text
+      }) | trim | indent(2) }}
+    {% endif %}
+
+    {% set number_of_items_added = (params.get('data', {}).get(params.question.id) or []) | length %}
+    {% if number_of_items_added > 0 %}
+      <div class="dm-list-multiquestion__items">
+        {% for index in range(0, number_of_items_added)%}
+          {% set multi_question = params.question.questions[index] %}
+          {% set item_data = params.data[params.question.id][index] %}
+          {% if multi_question.questions -%}
+            <div class="dm-list-multiquestion__item">
+              <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                  {% call govukDetails({
+                    "summaryText": multi_question.question
+                  }) %}
+                    {% for question in multi_question.questions %}
+                      {% set question_id = question.id.split('-')[0] %}
+                      {% if question_id in item_data and item_data[question_id] != undefined and item_data[question_id] is not none %}
+                        <div class="dm-list-multiquestion__item-summary">
+                          <p class="govuk-body govuk-!-margin-bottom-1">{{ question.name if question.name else question.question }}</p>
+                          {{ digitalmarketplaceSummaryContent({
+                            "type": question.type,
+                            "value": item_data[question_id]
+                          }) }}
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  {% endcall%}
+                </div>
+              </div>
+              <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                  <div class="govuk-button-group">
+                    {% if params.server_side_options.submit %}
+                      {{ govukButton({
+                        "html": 'Edit<span class="govuk-visually-hidden"> item {}</span>'.format(index + 1),
+                        "classes": 'govuk-button--secondary dm-list-multiquestion__item-edit',
+                        "name": 'edit-list-multiquestion',
+                        "value": "{}:{}".format(params.question.id, index)
+                      }) }}
+                    {% else %}
+                      {{ govukButton({
+                        "html": 'Edit<span class="govuk-visually-hidden"> item {}</span>'.format(index + 1),
+                        "classes": 'govuk-button--secondary dm-list-multiquestion__item-edit',
+                        "href": url_for(params.server_side_options.add_endpoint, item_number=index, question_id=params.question.id, **params.server_side_options.endpoint_values)
+                      }) }}
+                    {% endif %}
+                    {% if number_of_items_added > 1 %}
+                      {% if params.server_side_options.submit %}
+                        {{ govukButton({
+                          "html": 'Remove<span class="govuk-visually-hidden"> item {}</span>'.format(index + 1),
+                          "classes": 'govuk-button--warning dm-list-multiquestion__item-remove',
+                          "name": 'remove-list-multiquestion',
+                          "value": "{}:{}".format(params.question.id, index)
+                        }) }}
+                      {% else %}
+                        {{ govukButton({
+                          "html": 'Remove<span class="govuk-visually-hidden"> item {}</span>'.format(index + 1),
+                          "classes": 'govuk-button--warning dm-list-multiquestion__item-remove',
+                          "href": url_for(params.server_side_options.remove_endpoint, item_number=index, question_id=params.question.id, **params.server_side_options.endpoint_values)
+                        }) }}
+                      {% endif %}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-two-thirds govuk-!-margin-bottom-6">
+          {%- endif %}
+        {% endfor %}
+        {{ digitalmarketplaceQuestionHidden({
+          "type": 'list_multiquestion',
+          "question": params.question,
+          "data": params.data
+        }) }}
+      </div>
+    {% endif %}
+
+    {% if number_of_items_added < params.question.number_of_items %}
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+          {% if params.server_side_options.submit %}
+            {{ govukButton({
+              "html": 'Add ({} remaining)'.format(params.question.number_of_items - number_of_items_added),
+              "classes": 'govuk-button--secondary dm-list-multiquestion__item-add',
+              "name": 'add-list-multiquestion',
+              "value": "{}:{}".format(params.question.id, number_of_items_added)
+            }) }}
+          {% else %}
+            {{ govukButton({
+              "html": 'Add ({} remaining)'.format(params.question.number_of_items - number_of_items_added),
+              "classes": 'govuk-button--secondary dm-list-multiquestion__item-add',
+              "href": url_for(params.server_side_options.add_endpoint, item_number=number_of_items_added, question_id=params.question.id, **params.server_side_options.endpoint_values)
+            }) }}
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  {% endcall %}
+</div>
+{% endmacro %}
