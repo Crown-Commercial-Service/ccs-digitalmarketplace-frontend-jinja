@@ -1,5 +1,6 @@
 {% macro digitalmarketplaceHeader(params) %}
 {%- from 'govuk_frontend_jinja/components/header/macro.html' import govukHeader -%}
+{%- from "govuk_frontend_jinja/components/service-navigation/macro.html" import govukServiceNavigation -%}
 
 {% set user_logged_in = true if params.role else false %}
 {% set users_role = params.role | default(none) %}
@@ -7,10 +8,10 @@
 {% set isAdmin = params.isAdmin | default(false) %}
 
 {% if isAdmin %}
-  {% set adminAppClass = 'dm-admin-header' %}
+  {% set adminAppClass = 'dm-admin-header govuk-header--full-width-border' %}
   {% set productName = 'Digital Marketplace Admin' %}
 {% else %}
-  {% set adminAppClass = '' %}
+  {% set adminAppClass = 'govuk-header--full-width-border' %}
   {% set productName = 'Digital Marketplace' %}
 {% endif %}
 
@@ -59,14 +60,13 @@
     }
   ]%}
 {% endif %}
-{{
-  govukHeader({
-    'assetsPath': '/static/images',
-    'productName': productName,
-    'homepageUrl': '/',
-    'classes': adminAppClass,
-    'navigation': headerNavigation,
-    'useTudorCrown': True
-  })
-}}
+{{ govukHeader({
+  'assetsPath': '/static/images',
+  'classes': adminAppClass
+}) }}
+{{ govukServiceNavigation({
+  'navigation': headerNavigation,
+  'serviceName': productName,
+  'serviceUrl': '/'
+}) }}
 {% endmacro %}

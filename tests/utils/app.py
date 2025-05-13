@@ -79,6 +79,7 @@ def create_app():
             )
         ]
     )
+    app.jinja_env.globals["govukRebrand"] = False
 
     # For the urls in the header and footer
     app.register_blueprint(external_blueprint)
