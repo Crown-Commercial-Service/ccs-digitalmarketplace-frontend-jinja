@@ -1,0 +1,38 @@
+{% macro digitalmarketplaceQuestionMoney(params) %}
+{%- from "govuk_frontend_jinja/components/input/macro.html" import govukInput -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question-format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
+
+{% set name = params.question.id %}
+{% set questionText = params.question.question + " ({})".format(params.question.optional_text if params.question.optional_text else "optional") if params.question.optional else params.question.question %}
+
+{% if params.errors and params.errors[name] %}
+  {% set errorMessage = { "text": params.errors[name]["message"] } %}
+{% elif params.frameworkReusedFrom and params.data and params.data[name] %}
+  {% set errorMessage = {
+    "text": "This answer is from your " + params.frameworkReusedFrom + " declaration",
+    "visuallyHiddenText": "Notice"
+  } %}
+  {% set formGroupClasses = "dm-form-group--declaration-reuse" %}
+{% endif %}
+
+{{ govukInput({
+  "name": name,
+  "id": "input-" + name,
+  "classes": 'govuk-input--width-10',
+  "label": {
+    'html': questionText,
+    "classes": "govuk-label--m"
+  },
+  "formGroup": {
+    "classes": formGroupClasses
+  },
+  "hint": {
+    "html": digitalmarketplaceQuestionFormatHint(params.question)
+  } if params.question.hint or params.question.question_advice,
+  "value": params.data[name] if params.data,
+  "errorMessage": errorMessage if errorMessage,
+  "prefix": {
+    "text": params.question.unit
+  }
+}) }}
+{% endmacro %}
