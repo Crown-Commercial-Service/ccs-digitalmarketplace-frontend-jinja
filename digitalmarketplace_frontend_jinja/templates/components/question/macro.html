@@ -3,6 +3,7 @@
 {%- from "digitalmarketplace_frontend_jinja/components/question-pricing/macro.html" import digitalmarketplaceQuestionPricing -%}
 {%- from "digitalmarketplace_frontend_jinja/components/question-upload/macro.html" import digitalmarketplaceQuestionUpload -%}
 {%- from "digitalmarketplace_frontend_jinja/components/question-number/macro.html" import digitalmarketplaceQuestionNumber -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question-money/macro.html" import digitalmarketplaceQuestionMoney -%}
 {%- from "digitalmarketplace_frontend_jinja/components/question-character-count/macro.html" import digitalmarketplaceQuestionCharacterCount -%}
 {%- from "digitalmarketplace_frontend_jinja/components/question-date/macro.html" import digitalmarketplaceQuestionDate -%}
 {%- from "digitalmarketplace_frontend_jinja/components/question-radios/macro.html" import digitalmarketplaceQuestionRadios -%}
@@ -28,6 +29,8 @@
     {{ digitalmarketplaceQuestionUpload(params) }}
   {% elif params.type == 'number' %}
     {{ digitalmarketplaceQuestionNumber(params) }}
+  {% elif params.type == 'money' %}
+    {{ digitalmarketplaceQuestionMoney(params) }}
   {% elif params.type == 'textbox_large' %}
     {{ digitalmarketplaceQuestionCharacterCount(params) }}
   {% elif params.type == 'date' %}
