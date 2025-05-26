@@ -6,9 +6,9 @@
 #
 blinker==1.9.0
     # via flask
-boto3==1.38.18
+boto3==1.38.23
     # via ccs-digitalmarketplace-utils
-botocore==1.38.18
+botocore==1.38.23
     # via
     #   boto3
     #   s3transfer
@@ -143,7 +143,7 @@ requests==2.32.3
     #   ccs-digitalmarketplace-utils
     #   mailchimp3
     #   notifications-python-client
-s3transfer==0.12.0
+s3transfer==0.13.0
     # via boto3
 six==1.17.0
     # via python-dateutil
