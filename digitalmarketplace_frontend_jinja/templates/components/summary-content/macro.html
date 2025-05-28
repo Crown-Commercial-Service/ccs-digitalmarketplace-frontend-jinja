@@ -10,13 +10,7 @@
 {%- from "digitalmarketplace_frontend_jinja/components/summary-content-multiquestion/macro.html" import digitalmarketplaceSummaryContentMultiquestion -%}
 {%- from "digitalmarketplace_frontend_jinja/components/summary-content-list-multiquestion/macro.html" import digitalmarketplaceSummaryContentListMultiquestion -%}
 
-{% set textOptions = ['text', 'text_bold', 'textbox', 'textbox_large', 'pricing', 'date', 'money'] %}
-
-{% if params.type in textOptions %}
-  {{ digitalmarketplaceSummaryContentText({
-    "value": params.value
-  }) }}
-{% elif params.type == 'list' or params.type == 'checkboxes'%}
+{% if params.type == 'list' or params.type == 'checkboxes'%}
   {{ digitalmarketplaceSummaryContentList({
     "value": params.value
   }) }}
@@ -51,6 +45,10 @@
 {% elif params.type == 'list_multiquestion' %}
   {{ digitalmarketplaceSummaryContentListMultiquestion({
     'value': params.value
+  }) }}
+{% else %}
+  {{ digitalmarketplaceSummaryContentText({
+    "value": params.value
   }) }}
 {% endif %}
 {% endmacro %}
