@@ -63,8 +63,6 @@ flask-wtf==1.2.2
     # via ccs-digitalmarketplace-utils
 fleep==1.0.1
     # via ccs-digitalmarketplace-utils
-govuk-country-register==0.5.0
-    # via ccs-digitalmarketplace-utils
 identify==2.6.12
     # via pre-commit
 idna==3.10
@@ -92,6 +90,7 @@ mailchimp3==3.0.21
     # via ccs-digitalmarketplace-utils
 markupsafe==3.0.2
     # via
+    #   flask
     #   jinja2
     #   werkzeug
     #   wtforms
@@ -111,6 +110,8 @@ odfpy==1.4.1
     # via ccs-digitalmarketplace-utils
 packaging==25.0
     # via pytest
+pathspec==0.12.1
+    # via mypy
 platformdirs==4.3.8
     # via virtualenv
 pluggy==1.6.0
