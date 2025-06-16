@@ -20,7 +20,7 @@ ccs-digitalmarketplace-utils==76.8.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
 ccs-govuk-frontend-jinja==1.6.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
-certifi==2025.4.26
+certifi==2025.6.15
     # via requests
 cffi==1.17.1
     # via cryptography
