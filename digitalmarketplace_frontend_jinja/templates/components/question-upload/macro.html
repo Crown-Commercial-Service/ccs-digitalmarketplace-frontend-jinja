@@ -16,6 +16,15 @@
           <span class="dm-document-upload-with-icon">
             <span class="dm-document-icon"></span>
             Document uploaded {{ value | parse_document_upload_time | datetimeformat }}
+            {%set link = url_for('.remove_upload')%}
+            {% if params.question.optional and link %}
+                   {{ govukButton({
+                      "text": "Remove upload",
+                      "classes": "govuk-button--warning",
+                      "attributes": {'formaction': url_for('.remove_upload', file_url=value, question_id=params.question.id),
+                      'type':'submit', 'formenctype':'application/x-www-form-urlencoded', 'formmethod':'post'}
+                    }) }}
+            {% endif %}
           </span>
         </li>
       </ul>
