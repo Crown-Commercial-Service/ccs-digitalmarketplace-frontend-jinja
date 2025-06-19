@@ -1,6 +1,7 @@
 {% macro digitalmarketplaceQuestionUpload(params) %}
 {%- from "govuk_frontend_jinja/components/file-upload/macro.html" import govukFileUpload -%}
 {%- from "digitalmarketplace_frontend_jinja/components/question-format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
+{% from "govuk_frontend_jinja/components/button/macro.html" import govukButton %}
 
 {% set name = params.question.id %}
 {% set questionText = params.question.question + " ({})".format(params.question.optional_text if params.question.optional_text else "optional") if params.question.optional else params.question.question %}
