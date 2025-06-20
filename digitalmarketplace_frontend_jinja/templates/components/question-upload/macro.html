@@ -14,19 +14,25 @@
       <input type="hidden" id="input-{{ name }}-upload" name="{{ name }}-upload" value="{{ value }}">
       <ul class="dm-document-upload-list">
         <li class="dm-document-list-item">
-          <span class="dm-document-upload-with-icon">
-            <span class="dm-document-icon"></span>
-            Document uploaded {{ value | parse_document_upload_time | datetimeformat }}
-            {%set link = url_for('.remove_upload')%}
-            {% if params.question.optional and link %}
-                   {{ govukButton({
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+              <div class="dm-document-upload-with-icon">
+                <span class="dm-document-icon"></span>
+                Document uploaded {{ value | parse_document_upload_time | datetimeformat }}
+              </div>
+            </div>
+            <div class="govuk-grid-column-one-third">
+                {% if params.question.optional %}
+                    {{ govukButton({
                       "text": "Remove upload",
-                      "classes": "govuk-button--warning",
-                      "attributes": {'formaction': url_for('.remove_upload', file_url=value, question_id=params.question.id),
-                      'type':'submit', 'formenctype':'application/x-www-form-urlencoded', 'formmethod':'post'}
+                      "name": "remove-upload",
+                      "value": name,
+                      "classes": "govuk-button--secondary",
+                      "preventDoubleClick": true
                     }) }}
-            {% endif %}
-          </span>
+                {% endif %}
+            </div>
+          </div>
         </li>
       </ul>
     {% endif %}
