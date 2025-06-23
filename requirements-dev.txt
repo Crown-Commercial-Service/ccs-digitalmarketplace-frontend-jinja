@@ -118,11 +118,11 @@ pluggy==1.6.0
     # via pytest
 pre-commit==4.2.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
-pycodestyle==2.13.0
+pycodestyle==2.14.0
     # via flake8
 pycparser==2.22
     # via cffi
-pyflakes==3.3.2
+pyflakes==3.4.0
     # via flake8
 pygments==2.19.2
     # via pytest
