@@ -10,6 +10,7 @@
 {%- from "digitalmarketplace_frontend_jinja/components/question-boolean/macro.html" import digitalmarketplaceQuestionBoolean -%}
 {%- from "digitalmarketplace_frontend_jinja/components/question-checkboxes/macro.html" import digitalmarketplaceQuestionCheckboxes -%}
 {%- from "digitalmarketplace_frontend_jinja/components/question-checkbox-tree/macro.html" import digitalmarketplaceQuestionCheckboxTree -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question-checkbox-tree-large/macro.html" import digitalmarketplaceQuestionCheckboxTreeLarge -%}
 {%- from "digitalmarketplace_frontend_jinja/components/question-list/macro.html" import digitalmarketplaceQuestionList -%}
 {%- from "digitalmarketplace_frontend_jinja/components/question-select/macro.html" import digitalmarketplaceQuestionSelect -%}
 {%- from "digitalmarketplace_frontend_jinja/components/question-multiquestion/macro.html" import digitalmarketplaceQuestionMultiquestion -%}
@@ -43,6 +44,8 @@
     {{ digitalmarketplaceQuestionCheckboxes(params) }}
   {% elif params.type == 'checkbox_tree' %}
     {{ digitalmarketplaceQuestionCheckboxTree(params) }}
+  {% elif params.type == 'checkbox_tree_large' %}
+    {{ digitalmarketplaceQuestionCheckboxTreeLarge(params) }}
   {% elif params.type == 'list' %}
     {{ digitalmarketplaceQuestionList(params) }}
   {% elif params.type == 'select' %}

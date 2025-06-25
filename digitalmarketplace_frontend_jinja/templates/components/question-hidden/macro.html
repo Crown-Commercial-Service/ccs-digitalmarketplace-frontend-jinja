@@ -94,7 +94,7 @@
     {{ digitalmarketplaceQuestionPricingHidden(params) }}
   {% elif params.type == 'date' %}
     {{ digitalmarketplaceQuestionDateHidden(params) }}
-  {% elif params.type in ['checkboxes', 'checkbox_tree', 'list'] %}
+  {% elif params.type in ['checkboxes', 'checkbox_tree', 'checkbox_tree_large', 'list'] %}
     {{ digitalmarketplaceQuestionCheckboxesHidden(params) }}
   {% elif params.type == 'multiquestion' %}
     {{ digitalmarketplaceQuestionMultiquestionHidden(params) }}

@@ -34,7 +34,7 @@
   {{ digitalmarketplaceSummaryContentNumber({
     "value": params.value
   }) }}
-{% elif params.type == 'checkbox_tree' %}
+{% elif params.type == 'checkbox_tree' or params.type == 'checkbox_tree_large' %}
   {{ digitalmarketplaceSummaryContentCheckboxTree({
     "value": params.value
   }) }}
