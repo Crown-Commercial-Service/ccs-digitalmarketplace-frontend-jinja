@@ -15,23 +15,23 @@
       <ul class="dm-document-upload-list">
         <li class="dm-document-list-item">
           <div class="govuk-grid-row">
-            <div class="govuk-grid-column-two-thirds">
+            <div class="govuk-grid-column-{{ 'two-thirds' if params.question.optional else 'full' }}">
               <div class="dm-document-upload-with-icon">
                 <span class="dm-document-icon"></span>
                 Document uploaded {{ value | parse_document_upload_time | datetimeformat }}
               </div>
             </div>
-            <div class="govuk-grid-column-one-third">
-                {% if params.question.optional %}
-                    {{ govukButton({
-                      "text": "Remove upload",
-                      "name": "remove-upload",
-                      "value": name,
-                      "classes": "govuk-button--secondary",
-                      "preventDoubleClick": true
-                    }) }}
-                {% endif %}
-            </div>
+            {% if params.question.optional %}
+              <div class="govuk-grid-column-one-third">
+                {{ govukButton({
+                  "text": "Remove upload",
+                  "name": "remove-upload",
+                  "value": name,
+                  "classes": "govuk-button--secondary",
+                  "preventDoubleClick": true
+                }) }}
+              </div>
+            {% endif %}
           </div>
         </li>
       </ul>

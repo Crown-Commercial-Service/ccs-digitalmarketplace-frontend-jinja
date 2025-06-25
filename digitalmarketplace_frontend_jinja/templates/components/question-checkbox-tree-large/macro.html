@@ -1,0 +1,83 @@
+{% macro digitalmarketplaceQuestionCheckboxTreeLarge(params) %}
+{%- from "govuk_frontend_jinja/components/fieldset/macro.html" import govukFieldset -%}
+{%- from "govuk_frontend_jinja/components/checkboxes/macro.html" import govukCheckboxes -%}
+{%- from "govuk_frontend_jinja/components/hint/macro.html" import govukHint -%}
+{%- from "govuk_frontend_jinja/components/accordion/macro.html" import govukAccordion -%}
+{%- from "govuk_frontend_jinja/components/error-message/macro.html" import govukErrorMessage -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question-format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
+
+{% set name = params.question.id %}
+{% set questionText = params.question.question + " ({})".format(params.question.optional_text if params.question.optional_text else "optional") if params.question.optional else params.question.question %}
+{% set errorMessage = params.errors[name] if params.errors %}
+{% set values = params.data[name] or [] if params.data else [] %}
+
+<div class="govuk-form-group {%- if errorMessage %} govuk-form-group--error{% endif %}">
+  {% call govukFieldset({
+    "legend": {
+      "html": questionText,
+      "classes": "govuk-fieldset__legend--m"
+    },
+    "classes": 'dm-checkbox-tree-large',
+    "attributes": {
+      'aria-describedby': "input-" + name if errorMessage,
+    }
+  }) %}
+    {% if params.question.hint or params.question.question_advice %}
+      {{ govukHint({
+        "html": digitalmarketplaceQuestionFormatHint(params.question)
+      }) }}
+    {% endif %}
+
+    {% if errorMessage %}
+      {{ govukErrorMessage({
+        "text": errorMessage["message"],
+        "id": "input-" + name
+      }) }}
+    {% endif %}
+
+    <div class="govuk-grid-row">
+      <div class="dm-checkbox-tree-large__summary govuk-grid-column-full">
+        {% set accordionItems = [] %}
+
+        {% for option in params.question.options %}
+          {% set checkboxItems = [] %}
+
+          {% for label in option.options %}
+            {% set checkboxItem = {
+              "text": label.label,
+              "value": label.label,
+              "checked": label.label in values
+            } %}
+            {% if label.description %}
+              {% set _checkboxItem = checkboxItem.__setitem__("hint", { "html": label.description }) %}
+            {% endif %}
+            {% set _checkboxItems = checkboxItems.append(checkboxItem) %}
+          {% endfor %}
+
+          {% set _accordionItems = accordionItems.append({
+            "heading": {
+              "text": option.label
+            },
+            "summary": {
+              "html": option.description
+            } if option.description,
+            "content": {
+              "html": govukCheckboxes({
+                "name": name,
+                "idPrefix": "input-" + name + '-' + loop.index | string,
+                "items": checkboxItems,
+                "classes": "govuk-checkboxes--small"
+              })
+            }
+          }) %}
+        {% endfor %}
+
+        {{ govukAccordion({
+          "id": "accordion-" + name,
+          "items": accordionItems
+        }) }}
+      </div>
+    </div>
+  {% endcall %}
+</div>
+{% endmacro %}
