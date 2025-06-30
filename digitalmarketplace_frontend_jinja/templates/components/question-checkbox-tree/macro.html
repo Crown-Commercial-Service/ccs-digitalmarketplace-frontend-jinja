@@ -58,10 +58,11 @@
             {% set checkboxItems = [] %}
 
             {% for label in option.options %}
+              {% set value = label.value if label.value else label.label %}
               {% set _checkboxItems = checkboxItems.append({
                 "text": label.label,
-                "value": label.label,
-                "checked": label.label in values
+                "value": value,
+                "checked": value in values
               }) %}
             {% endfor %}
 
