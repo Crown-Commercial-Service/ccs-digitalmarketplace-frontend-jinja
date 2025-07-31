@@ -1,26 +1,36 @@
 {% macro digitalmarketplaceSummaryContentCheckboxTree(params) %}
+{% macro checkboxTreeList(items) %}
+  <ul class="govuk-list govuk-list--bullet govuk-body-s">
+    {% for item in items %}
+      <li>{{ item.label }}</li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{% macro checkboxTreeSummary(item) %}
+  <li>
+    <p class="govuk-!-margin-bottom-1">{{ item.label }}</p>
+    {% if item.options[0].options %}
+      <ul class="govuk-list">
+        {% for sub_item in item.options %}
+          {{ checkboxTreeSummary(sub_item) }}
+        {% endfor %}
+      </ul>
+    {% else %}
+      {{ checkboxTreeList(item.options) }}
+    {% endif %}
+  </li>
+{% endmacro %}
+
 {% if params.value -%}
   {% set no_children = (params.value | selectattr("options") | list |length) == 0 %}
 
   {% if no_children %}
-    <ul class="govuk-list govuk-list--bullet govuk-body-s">
-      {% for item in params.value %}
-        <li>{{ item.label }}</li>
-      {% endfor %}
-    </ul>
+    {{ checkboxTreeList(params.value) }}
   {% else %}
     <ul class="govuk-list">
-      {% for parent_category in params.value %}
-        <li>
-          <p class="govuk-!-margin-bottom-1">{{ parent_category.label }}</p>
-          {% if parent_category.options %}
-            <ul class="govuk-list govuk-list--bullet govuk-body-s">
-              {% for item in parent_category.options %}
-                <li>{{ item.label }}</li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </li>
+      {% for item in params.value %}
+        {{ checkboxTreeSummary(item) }}
       {% endfor %}
     </ul>
   {% endif %}
