@@ -43,14 +43,20 @@
           {% set checkboxItems = [] %}
 
           {% for label in option.options %}
-            {% set value = label.value if label.value else label.label %}
-            {% set checkboxItem = {
-              "text": label.label,
-              "value": value,
-              "checked": value in values
-            } %}
-            {% if label.description %}
-              {% set _checkboxItem = checkboxItem.__setitem__("hint", { "html": label.description }) %}
+            {% if label.divider %}
+              {% set checkboxItem = {
+                "divider": label.divider | safe
+              } %}
+            {% else %}
+              {% set value = label.value if label.value else label.label %}
+              {% set checkboxItem = {
+                "text": label.label,
+                "value": value,
+                "checked": value in values
+              } %}
+              {% if label.description %}
+                {% set _checkboxItem = checkboxItem.__setitem__("hint", { "html": label.description }) %}
+              {% endif %}
             {% endif %}
             {% set _checkboxItems = checkboxItems.append(checkboxItem) %}
           {% endfor %}

@@ -21,25 +21,29 @@
 {% endif %}
 
 {% for option in params.question.options %}
-  {% set value = option.value if option.value else option.label %}
-  {% set item = {
-    "text": option.label,
-    "value": value,
-    "checked": value in (params.data[name] or [] if params.data else [])
-  } %}
-  {% if option.description %}
-    {% set _item = item.__setitem__('hint', { "html": option.description }) %}
-  {% endif %}
-  {% if valueToQuestions[value] %}
-    {% set data_targets = [] %}
-    {% for data_target in valueToQuestions[value].split(" ") %}
-      {% if params.list_multi_question_index != undefined  %}
-        {% set _data_targets = data_targets.append("{}-{}".format(data_target, params.list_multi_question_index)) %}
-      {% else %}
-        {% set _data_targets = data_targets.append(data_target) %}
-      {% endif %}
-    {% endfor %}
-    {% set _item = item.__setitem__('attributes', { 'data-target': " ".join(data_targets) }) %}
+  {% if option.divider %}
+    {% set item = { "divider": option.divider } %}
+  {% else %}
+    {% set value = option.value if option.value else option.label %}
+    {% set item = {
+      "text": option.label,
+      "value": value,
+      "checked": value in (params.data[name] or [] if params.data else [])
+    } %}
+    {% if option.description %}
+      {% set _item = item.__setitem__('hint', { "html": option.description }) %}
+    {% endif %}
+    {% if valueToQuestions[value] %}
+      {% set data_targets = [] %}
+      {% for data_target in valueToQuestions[value].split(" ") %}
+        {% if params.list_multi_question_index != undefined  %}
+          {% set _data_targets = data_targets.append("{}-{}".format(data_target, params.list_multi_question_index)) %}
+        {% else %}
+          {% set _data_targets = data_targets.append(data_target) %}
+        {% endif %}
+      {% endfor %}
+      {% set _item = item.__setitem__('attributes', { 'data-target': " ".join(data_targets) }) %}
+    {% endif %}
   {% endif %}
   {% set _items = items.append(item) %}
 {% endfor %}
