@@ -40,7 +40,7 @@ distlib==0.4.0
     # via virtualenv
 docopt==0.6.2
     # via notifications-python-client
-filelock==3.18.0
+filelock==3.19.1
     # via virtualenv
 flake8==7.3.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
