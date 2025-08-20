@@ -42,6 +42,7 @@
       {% set column_width = params.question.column_width or 'one-half' %}
       {% for multi_question in params.question.questions %}
         {% if multi_question.questions -%}
+          {% set list_multi_question_index = loop.index - 1 %}
           <div class="dm-list-multiquestion__item govuk-!-margin-bottom-6">
             {% call govukFieldset({
               "legend": {
@@ -67,7 +68,7 @@
                     "data": params.data,
                     "errors": params.errors,
                     "frameworkReusedFrom": params.frameworkReusedFrom,
-                    "list_multi_question_index": index
+                    "list_multi_question_index": list_multi_question_index
                   }) }}
                 </div>
                 {% if index % column_width_to_number_for_wrap[column_width] == column_width_to_number_for_wrap[column_width] - 1 %}
