@@ -50,12 +50,6 @@
                 "classes": 'govuk-fieldset__legend--m'
               }
             }) %}
-              {% if multi_question.question_advice %}
-                <div class="govuk-body">
-                  {{ multi_question.question_advice | safe }}
-                </div>
-              {% endif %}
-
               {% for question in multi_question.questions %}
                 {% set index = loop.index - 1 %}
                 {% if index % column_width_to_number_for_wrap[column_width] == 0 %}
