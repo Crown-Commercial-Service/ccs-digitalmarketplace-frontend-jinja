@@ -9,6 +9,7 @@
 {%- from "digitalmarketplace_frontend_jinja/components/summary-content-checkbox-tree/macro.html" import digitalmarketplaceSummaryContentCheckboxTree -%}
 {%- from "digitalmarketplace_frontend_jinja/components/summary-content-multiquestion/macro.html" import digitalmarketplaceSummaryContentMultiquestion -%}
 {%- from "digitalmarketplace_frontend_jinja/components/summary-content-list-multiquestion/macro.html" import digitalmarketplaceSummaryContentListMultiquestion -%}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content-formula/macro.html" import digitalmarketplaceSummaryContentFormula -%}
 
 {% if params.type == 'list' or params.type == 'checkboxes'%}
   {{ digitalmarketplaceSummaryContentList({
@@ -44,6 +45,10 @@
   }) }}
 {% elif params.type == 'list_multiquestion' %}
   {{ digitalmarketplaceSummaryContentListMultiquestion({
+    'value': params.value
+  }) }}
+{% elif params.type == 'formula' %}
+  {{ digitalmarketplaceSummaryContentFormula({
     'value': params.value
   }) }}
 {% else %}

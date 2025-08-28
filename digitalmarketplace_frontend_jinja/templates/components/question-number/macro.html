@@ -1,5 +1,6 @@
 {% macro digitalmarketplaceQuestionNumber(params) %}
 {%- from "govuk_frontend_jinja/components/input/macro.html" import govukInput -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question-format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
 
 {% set name = params.question.id %}
 {% set questionText = params.question.question + " ({})".format(params.question.optional_text if params.question.optional_text else "optional") if params.question.optional else params.question.question %}
@@ -39,8 +40,8 @@
     "classes": formGroupClasses
   },
   "hint": {
-    "html": params.question.hint
-  } if params.question.hint,
+    "html": digitalmarketplaceQuestionFormatHint(params.question)
+  } if params.question.hint or params.question.question_advice,
   "value": params.data[name] if params.data,
   "errorMessage": errorMessage if errorMessage,
   "prefix": prefix if prefix,
