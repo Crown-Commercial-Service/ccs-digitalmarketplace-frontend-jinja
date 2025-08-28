@@ -1,0 +1,102 @@
+{% macro digitalmarketplaceQuestionFormula(params) %}
+{%- from "govuk_frontend_jinja/components/fieldset/macro.html" import govukFieldset -%}
+{%- from "govuk_frontend_jinja/components/label/macro.html" import govukLabel -%}
+{%- from "govuk_frontend_jinja/components/hint/macro.html" import govukHint -%}
+{%- from "govuk_frontend_jinja/components/error-message/macro.html" import govukErrorMessage -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question-format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
+
+{%- if params.question.questions -%}
+  {% call govukFieldset({
+    "legend": {
+      "text": params.question.question,
+      "classes": 'govuk-fieldset__legend--m'
+    }
+  }) %}
+    {%- if params.question.question_advice -%}
+      <div class="govuk-body">
+        {{ params.question.question_advice | safe }}
+      </div>
+    {%- endif -%}
+
+    <table class="govuk-table dm-question-formula">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header govuk-!-width-one-half"><span class="govuk-visually-hidden">Question</span></th>
+          <th scope="col" class="govuk-table__header govuk-!-width-one-half"><span class="govuk-visually-hidden">Answer</span></th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        {%- for question in params.question.questions -%}
+          {%- if question.operation and question.operation_position == "before" -%}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" colspan="2"><strong class="govuk-!-font-size-27">{{ question.operation }}</strong></td>
+            </tr>
+          {%- endif -%}
+
+          {%- if question.type == 'display' -%}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">{{ question.question }}</td>
+              <td class="govuk-table__cell">{{ question.value }}</td>
+            </tr>
+          {%- elif question.type == 'textbox_large' -%}
+            {% set name = question.id %}
+            {% set id =  "input-" + name %}
+            {% set questionText = question.question %}
+            {% set value = params.data[name] if params.data and params.data[name] %}
+
+            {% set describedBy = id + '-info' %}
+
+            <tr class="govuk-table__row govuk-character-count" data-module="govuk-character-count" data-maxwords="{{ (question.max_length_in_words | string) }}">
+              <td class="govuk-table__cell{% if params.errors and params.errors[name] %} dm-question-formula--error{% endif %}">
+                {{ govukLabel({
+                  "html": questionText,
+                  "classes": "govuk-label--s",
+                  "for": id
+                }) | trim | indent(2) }}
+                {% if question.hint or question.question_advice %}
+                  {% set hintId = id + '-hint' %}
+                  {% set describedBy = describedBy + ' ' + hintId %}
+                  {{ govukHint({
+                    "id": hintId,
+                    "html": digitalmarketplaceQuestionFormatHint(question)
+                  }) | trim | indent(2) }}
+                {% endif %}
+                {% if params.errors and params.errors[name] %}
+                  {% set errorId = id + '-error' %}
+                  {% set rowQuestionClasses = "dm-question-formula--error "%}
+                  {% set describedBy = describedBy + ' ' + errorId %}
+                  {% set errorMessage = params.errors[name]["message"] %}
+                  {{ govukErrorMessage({
+                    "id": errorId,
+                    "text": errorMessage
+                  }) | trim | indent(2) }}
+                {% endif %}
+              </td>
+              <td class="govuk-table__cell">
+                <textarea
+                  class="govuk-textarea {%- if errorMessage %} govuk-textarea--error{% endif %} govuk-js-character-count"
+                  id="{{ id }}"
+                  name="{{ name }}"
+                  rows="3"
+                  {%- if describedBy %} aria-describedby="{{ describedBy }}"{% endif %}
+                >{{ value }}</textarea>
+                {{ govukHint({
+                  "text": 'You can enter up to ' + (question.max_length_in_words | string) + ' words',
+                  "id": id + '-info',
+                  "classes": 'govuk-character-count__message'
+                }) | trim }}
+              </td>
+            </tr>
+          {% endif %}
+
+          {%- if question.operation and question.operation_position == "after" -%}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" colspan="2"><strong class="govuk-!-font-size-27">{{ question.operation }}</strong></td>
+            </tr>
+          {%- endif -%}
+        {%- endfor -%}
+      </tbody>
+    </table>
+  {% endcall %}
+{%- endif %}
+{% endmacro %}

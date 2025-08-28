@@ -5,6 +5,6 @@
   "author": "CCS",
   "license": "MIT",
   "devDependencies": {
-    "digitalmarketplace-frontend": "3.12.1"
+    "digitalmarketplace-frontend": "3.13.0"
   }
 }
