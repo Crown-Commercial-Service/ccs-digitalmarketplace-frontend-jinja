@@ -1,29 +1,47 @@
 {% macro digitalmarketplaceSummaryContentFormula(params) %}
-{%- from "govuk_frontend_jinja/components/table/macro.html" import govukTable -%}
+{%- from "govuk_frontend_jinja/components/summary-list/macro.html" import govukSummaryList -%}
 
 {%- if params.value -%}
-  {%- set tableHead = [] -%}
-  {%- set tableRow = [] -%}
+  {%- set summaryListRows = [] -%}
 
   {%- for question in params.value %}
     {%- if question.operation and question.operation_position == "before" -%}
-      {%- set _tableHead = tableHead.append({ "text": question.operation }) -%}
-      {%- set _tableRow = tableRow.append({ "text": question.operation }) -%}
+      {%- set _summaryListRows = summaryListRows.append({
+        "key": {
+          "text": question.operation
+        },
+        "value": {
+          "text": question.operation
+        }
+      }) -%}
     {%- endif -%}
 
-    {%- set _tableHead = tableHead.append({ "text": question.name }) -%}
-    {%- set _tableRow = tableRow.append({ "text": question.value }) -%}
+    {%- set _summaryListRows = summaryListRows.append({
+      "key": {
+        "text": question.name if question.name else question.question
+      },
+      "value": {
+        'text': question.value
+      }
+    }) -%}
 
     {%- if question.operation and question.operation_position == "after" -%}
-      {%- set _tableHead = tableHead.append({ "text": question.operation }) -%}
-      {%- set _tableRow = tableRow.append({ "text": question.operation }) -%}
+      {%- set _summaryListRows = summaryListRows.append({
+        "key": {
+          "text": question.operation
+        },
+        "value": {
+          "text": question.operation
+        }
+      }) -%}
     {%- endif -%}
   {%- endfor -%}
 
-  {{ govukTable({
-    "head": tableHead,
-    "rows": [tableRow],
+  <hr class="govuk-section-break govuk-section-break--visible">
+  {{ govukSummaryList({
+    "rows": summaryListRows,
     "classes": 'dm-summary-content-formula'
   }) }}
+  <hr class="govuk-section-break govuk-section-break--visible">
 {%- endif -%}
 {% endmacro %}
