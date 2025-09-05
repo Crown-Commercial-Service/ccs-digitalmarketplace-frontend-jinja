@@ -87,6 +87,51 @@
                 }) | trim }}
               </td>
             </tr>
+          {%- elif question.type == 'text' -%}
+            {% set name = question.id %}
+            {% set id =  "input-" + name %}
+            {% set questionText = question.question %}
+            {% set value = params.data[name] if params.data and params.data[name] %}
+
+            {% set describedBy = '' %}
+
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell{% if  params.errors and params.errors[name] %} dm-question-formula--error{% endif %}">
+                {{ govukLabel({
+                  "html": questionText,
+                  "classes": "govuk-label--s",
+                  "for": id
+                }) | trim | indent(2) }}
+                {% if question.hint or question.question_advice %}
+                  {% set hintId = id + '-hint' %}
+                  {% set describedBy = (describedBy + ' ' + hintId) if describedBy else hintId %}
+                  {{ govukHint({
+                    "id": hintId,
+                    "html": digitalmarketplaceQuestionFormatHint(question)
+                  }) | trim | indent(2) }}
+                {% endif %}
+                {% if params.errors and params.errors[name] %}
+                  {% set errorId = id + '-error' %}
+                  {% set rowQuestionClasses = "dm-question-formula--error "%}
+                  {% set describedBy = (describedBy + ' ' + errorId) if describedBy else errorId %}
+                  {% set errorMessage = params.errors[name]["message"] %}
+                  {{ govukErrorMessage({
+                    "id": errorId,
+                    "text": errorMessage
+                  }) | trim | indent(2) }}
+                {% endif %}
+              </td>
+              <td class="govuk-table__cell">
+                <input
+                  class="govuk-input {%- if errorMessage %} govuk-input--error{% endif %}"
+                  id="{{ id }}"
+                  name="{{ name }}"
+                  type="text"
+                  {%- if value %} value="{{ value }}"{% endif %}
+                  {%- if describedBy %} aria-describedby="{{ describedBy }}"{% endif %}
+                >
+              </td>
+            </tr>
           {% endif %}
 
           {%- if question.operation and question.operation_position == "after" -%}
