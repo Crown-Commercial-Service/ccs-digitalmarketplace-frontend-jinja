@@ -32,7 +32,7 @@ click==8.2.1
     # via flask
 contextlib2==21.6.0
     # via ccs-digitalmarketplace-utils
-cryptography==45.0.6
+cryptography==45.0.7
     # via ccs-digitalmarketplace-utils
 defusedxml==0.7.1
     # via odfpy
