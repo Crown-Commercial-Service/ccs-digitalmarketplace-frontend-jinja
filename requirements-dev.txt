@@ -128,7 +128,7 @@ pygments==2.19.2
     # via pytest
 pyjwt==2.10.1
     # via notifications-python-client
-pytest==8.4.1
+pytest==8.4.2
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
 python-dateutil==2.9.0.post0
     # via botocore
