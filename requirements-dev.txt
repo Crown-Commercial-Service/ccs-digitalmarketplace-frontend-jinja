@@ -120,7 +120,7 @@ pre-commit==4.3.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
 pycodestyle==2.14.0
     # via flake8
-pycparser==2.22
+pycparser==2.23
     # via cffi
 pyflakes==3.4.0
     # via flake8
