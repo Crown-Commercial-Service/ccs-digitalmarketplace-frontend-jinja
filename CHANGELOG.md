@@ -4,6 +4,10 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
+## 4.16.0
+
+Upgrade Digital Marketplace Frontend to v3.15.0
+
 ## 4.15.0
 
 Use [GOV.UK Fontend Jinja](https://github.com/LandRegistry/govuk-frontend-jinja) instead of [CCS GOV.UK Frontend Jinja](https://github.com/Crown-Commercial-Service/ccs-govuk-frontend-jinja) now that the [issue with select](https://github.com/LandRegistry/govuk-frontend-jinja/issues/82) has been fixed

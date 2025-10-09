@@ -1,0 +1,43 @@
+{% macro digitalmarketplaceSelectFromForm(params) %}
+{%- from 'govuk_frontend_jinja/components/select/macro.html' import govukSelect -%}
+
+{% set name = params.form.name %}
+{% set items = params['items'] if 'items' in params else [] %}
+
+
+{% if 'items' not in params %}
+  {% for option in params.form.options %}
+    {% set item = {
+      "value": option["value"],
+      "text": option["label"]
+    } %}
+
+    {% if params.form.data == option["value"] %}
+      {% set _ = item.__setitem__("selected", true) %}
+    {% endif %}
+
+    {% for attribute in ["disabled", "attributes"] %}
+      {% set _ = item.__setitem__(attribute, option[attribute]) if attribute in option %}
+    {% endfor %}
+
+    {% set _ = items.append(item) %}
+  {% endfor %}
+
+  {% set _ = params.__setitem__("items", items) %}
+{% endif %}
+
+{% if "label" not in params %}
+  {% set _ = params.__setitem__("label", {}) %}
+{% endif %}
+{% set _ = params.label.__setitem__("text", params.form.question) %}
+{% if "classes" not in params.label %}
+  {% set _ = params.label.__setitem__("classes", "govuk-label--m") %}
+{% endif %}
+
+{% set _ = params.__setitem__("name", name) %}
+
+{% set _ = params.__setitem__("hint", { "text": params.form.hint }) if params.form.hint and "hint" not in params %}
+{% set _ = params.__setitem__("errorMessage", { "text": params.form.errors[0] }) if params.form.errors %}
+
+{{ govukSelect(params) }}
+{% endmacro %}

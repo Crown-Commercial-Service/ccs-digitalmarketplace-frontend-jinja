@@ -1,0 +1,51 @@
+{% macro digitalmarketplaceDateInputFromForm(params) %}
+{%- from 'govuk_frontend_jinja/components/date-input/macro.html' import govukDateInput -%}
+
+{% set name = params.form.name %}
+{% set items = params['items'] if 'items' in params else [] %}
+
+
+{% if 'items' not in params %}
+  {% for item in [
+    {
+      "name": "day",
+      "classes": "govuk-input--width-2"
+    },
+    {
+      "name": "month",
+      "classes": "govuk-input--width-2"
+    },
+    {
+      "name": "year",
+      "classes": "govuk-input--width-4"
+    }
+  ] %}
+
+    {% set _ = item.__setitem__("value", params.form[item.name].data) if item.name in params.form and params.form[item.name].data %}
+    {% set _ = item.__setitem__("classes", item.classes + ' govuk-input--error') if item.name in params.form and params.form[item.name].errors %}
+
+    {% set _ = items.append(item) %}
+  {% endfor %}
+
+  {% set _ = params.__setitem__("items", items) %}
+{% endif %}
+
+{% if "fieldset" not in params %}
+  {% set _ = params.__setitem__("fieldset", {}) %}
+{% endif %}
+{% if "legend" not in params.fieldset %}
+  {% set _ = params.fieldset.__setitem__("legend", {}) %}
+{% endif %}
+{% set _ = params.fieldset.legend.__setitem__("text", params.form.question) %}
+{% if not params.fieldset.legend.classes %}
+  {% set _ = params.fieldset.legend.__setitem__("classes", "govuk-fieldset__legend--m") %}
+{% endif %}
+
+{% set _ = params.__setitem__("namePrefix", name) %}
+{% set _ = params.__setitem__("id", "input-" + name) %}
+
+{% set _ = params.__setitem__("hint", { "text": params.form.hint }) if params.form.hint and "hint" not in params %}
+{% set _ = params.__setitem__("errorMessage", { "text": params.form.errors[0] }) if params.form.errors %}
+
+{{ govukDateInput(params) }}
+{% endmacro %}
