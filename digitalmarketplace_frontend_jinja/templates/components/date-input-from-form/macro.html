@@ -21,8 +21,8 @@
     }
   ] %}
 
-    {% set _ = item.__setitem__("value", params.form[item.name].data) if item.name in params.form and params.form[item.name].data %}
-    {% set _ = item.__setitem__("classes", item.classes + ' govuk-input--error') if item.name in params.form and params.form[item.name].errors %}
+    {% set _ = item.__setitem__("value", params.form[item.name].data) if params.form[item.name].data %}
+    {% set _ = item.__setitem__("classes", item.classes + ' govuk-input--error') if params.form[item.name].errors %}
 
     {% set _ = items.append(item) %}
   {% endfor %}
