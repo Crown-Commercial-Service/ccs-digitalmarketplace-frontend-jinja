@@ -65,7 +65,7 @@ govuk-frontend-jinja==3.8.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
 identify==2.6.15
     # via pre-commit
-idna==3.10
+idna==3.11
     # via requests
 iniconfig==2.1.0
     # via pytest
