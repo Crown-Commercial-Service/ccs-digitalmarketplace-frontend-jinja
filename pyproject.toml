@@ -8,9 +8,9 @@ dynamic = ["version"]
 dependencies = [
   'jinja2>3',
   'govuk-frontend-jinja>=3.9,<4',
-  'ccs-digitalmarketplace-utils>=79.6.0',
+  'ccs-digitalmarketplace-utils>=79.8.0',
 ]
-requires-python = ">=3.11,<3.14"
+requires-python = ">=3.11,<3.15"
 authors = [
   {name = "CCS Developers"},
 ]
