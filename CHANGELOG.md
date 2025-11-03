@@ -4,6 +4,10 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
+## 4.17.0
+
+Add support for Python 3.14 (πthon)
+
 ## 4.16.2
 
 Upgrade Digital Marketplace Frontend to v3.15.2
