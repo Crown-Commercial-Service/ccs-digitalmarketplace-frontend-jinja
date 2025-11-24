@@ -18,7 +18,7 @@ ccs-digitalmarketplace-apiclient==37.5.0
     # via ccs-digitalmarketplace-utils
 ccs-digitalmarketplace-utils==79.8.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
-certifi==2025.10.5
+certifi==2025.11.12
     # via requests
 cffi==2.0.0
     # via cryptography
