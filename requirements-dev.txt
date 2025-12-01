@@ -96,7 +96,7 @@ markupsafe==3.0.3
     #   wtforms
 mccabe==0.7.0
     # via flake8
-msgspec==0.19.0
+msgspec==0.20.0
     # via flask-session
 mypy==1.18.2
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
