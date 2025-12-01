@@ -16,7 +16,7 @@ cachelib==0.13.0
     # via flask-session
 ccs-digitalmarketplace-apiclient==37.9.0
     # via ccs-digitalmarketplace-utils
-ccs-digitalmarketplace-utils==79.10.0
+ccs-digitalmarketplace-utils==79.11.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
 certifi==2025.11.12
     # via requests
