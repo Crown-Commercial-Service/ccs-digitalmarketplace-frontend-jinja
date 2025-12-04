@@ -82,6 +82,8 @@ jmespath==1.0.1
     # via
     #   boto3
     #   botocore
+librt==0.6.3
+    # via mypy
 lxml==6.0.2
     # via
     #   ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
@@ -98,7 +100,7 @@ mccabe==0.7.0
     # via flake8
 msgspec==0.20.0
     # via flask-session
-mypy==1.18.2
+mypy==1.19.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
 mypy-extensions==1.1.0
     # via mypy
