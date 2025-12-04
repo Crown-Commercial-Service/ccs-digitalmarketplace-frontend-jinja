@@ -82,6 +82,8 @@ jmespath==1.0.1
     # via
     #   boto3
     #   botocore
+librt==0.6.3
+    # via mypy
 lxml==6.0.2
     # via
     #   ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
