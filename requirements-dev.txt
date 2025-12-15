@@ -156,7 +156,7 @@ typing-extensions==4.15.0
     # via mypy
 unicodecsv==0.14.1
     # via ccs-digitalmarketplace-utils
-urllib3==2.6.0
+urllib3==2.6.2
     # via
     #   botocore
     #   ccs-digitalmarketplace-utils
