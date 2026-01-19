@@ -63,7 +63,7 @@ flask-wtf==1.2.2
     # via ccs-digitalmarketplace-utils
 govuk-frontend-jinja==3.9.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
-identify==2.6.15
+identify==2.6.16
     # via pre-commit
 idna==3.11
     # via requests
