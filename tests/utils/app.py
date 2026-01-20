@@ -14,9 +14,9 @@ from dmutils.formats import datetimeformat
 
 
 def parse_document_upload_time(data):
-    match = re.search(r"(\d{4}-\d{2}-\d{2}-\d{2}\d{2})\..{2,3}$", data)
+    match = re.search(r'(\d{4}-\d{2}-\d{2}-\d{2}\d{2})\..{2,3}$', data)
     if match:
-        return datetime.strptime(match.group(1), "%Y-%m-%d-%H%M")
+        return datetime.strptime(match.group(1), '%Y-%m-%d-%H%M')
 
 
 # This is needed because of compliance communications attachments
@@ -29,10 +29,12 @@ class hidden_tag_dict(dict):
 
 
 def transform_dict_to_hidden_tag_dict(obj):
-    return hidden_tag_dict(**{
-        key: transform_dict_to_hidden_tag_dict(value) if isinstance(value, dict) else value
-        for key, value in obj.items()
-    })
+    return hidden_tag_dict(
+        **{
+            key: transform_dict_to_hidden_tag_dict(value) if isinstance(value, dict) else value
+            for key, value in obj.items()
+        }
+    )
 
 
 def _invoke(self, arguments, autoescape):
@@ -40,7 +42,7 @@ def _invoke(self, arguments, autoescape):
         return self._async_invoke(arguments, autoescape)
 
     arguments = [
-        transform_dict_to_hidden_tag_dict(argument)if isinstance(argument, dict) else argument
+        transform_dict_to_hidden_tag_dict(argument) if isinstance(argument, dict) else argument
         for argument in arguments
     ]
 
@@ -62,24 +64,18 @@ def create_app():
         [
             PrefixLoader(
                 {
-                    "govuk_frontend_jinja": PackageLoader("govuk_frontend_jinja"),
-                    "digitalmarketplace_frontend_jinja": FileSystemLoader(
+                    'govuk_frontend_jinja': PackageLoader('govuk_frontend_jinja'),
+                    'digitalmarketplace_frontend_jinja': FileSystemLoader(
                         searchpath=os.path.join(
-                            os.path.dirname(__file__),
-                            "../../digitalmarketplace_frontend_jinja/templates"
+                            os.path.dirname(__file__), '../../digitalmarketplace_frontend_jinja/templates'
                         )
-                    )
+                    ),
                 }
             ),
-            FileSystemLoader(
-                searchpath=os.path.join(
-                    os.path.dirname(__file__),
-                    "templates"
-                )
-            )
+            FileSystemLoader(searchpath=os.path.join(os.path.dirname(__file__), 'templates')),
         ]
     )
-    app.jinja_env.globals["govukRebrand"] = False
+    app.jinja_env.globals['govukRebrand'] = False
 
     # For the urls in the header and footer
     app.register_blueprint(external_blueprint)
@@ -90,21 +86,21 @@ def create_app():
 
     main = Blueprint('main', __name__)
 
-    @main.get("/")
+    @main.get('/')
     def index() -> str:
-        return "Hello there"
+        return 'Hello there'
 
-    @main.get("/suppliers/add-item/<section_id>/<question_id>/<item_number>")
+    @main.get('/suppliers/add-item/<section_id>/<question_id>/<item_number>')
     def add_item(section_id, question_id, item_number) -> str:
-        return "Hello there"
+        return 'Hello there'
 
-    @main.get("/suppliers/remove-item/<section_id>/<question_id>/<item_number>")
+    @main.get('/suppliers/remove-item/<section_id>/<question_id>/<item_number>')
     def remove_item(section_id, question_id, item_number) -> str:
-        return "Hello there"
+        return 'Hello there'
 
     app.register_blueprint(main)
 
-    @app.post("/component/<string:component>")
+    @app.post('/component/<string:component>')
     def component(component: str) -> Any:
         data: Any = request.get_json()
         # Render the component using the data provided
@@ -115,20 +111,20 @@ def create_app():
         return render_template_string(
             f"""
             {{% from "digitalmarketplace_frontend_jinja/components/{component}/macro.html" import digitalmarketplace{data['macro_name']} %}}
-            {{{{ digitalmarketplace{data['macro_name']}({data["params"]}) }}}}
+            {{{{ digitalmarketplace{data['macro_name']}({data['params']}) }}}}
             """
         )
 
-    @app.post("/layout/<string:layout>")
+    @app.post('/layout/<string:layout>')
     def layout(layout: str) -> Any:
         data: Any = request.get_json()
         # Render the layout template using the data provided
-        return render_template(f"digitalmarketplace_frontend_jinja/layouts/{layout}.html", **data.get('params', {}))
+        return render_template(f'digitalmarketplace_frontend_jinja/layouts/{layout}.html', **data.get('params', {}))
 
-    @app.post("/error/<string:error>")
+    @app.post('/error/<string:error>')
     def error_page(error: str) -> Any:
         data: Any = request.get_json()
         # Render the error template using the data provided
-        return render_template(f"digitalmarketplace_frontend_jinja/errors/{error}.html", **data.get('params', {}))
+        return render_template(f'digitalmarketplace_frontend_jinja/errors/{error}.html', **data.get('params', {}))
 
     return app
