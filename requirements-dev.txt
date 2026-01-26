@@ -106,7 +106,7 @@ notifications-python-client==10.0.1
     # via ccs-digitalmarketplace-utils
 odfpy==1.4.1
     # via ccs-digitalmarketplace-utils
-packaging==25.0
+packaging==26.0
     # via pytest
 pathspec==1.0.3
     # via mypy
