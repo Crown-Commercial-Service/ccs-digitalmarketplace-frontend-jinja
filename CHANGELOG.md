@@ -4,6 +4,10 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
+## 4.18.0
+
+Upgrade Digital Marketplace Frontend to v3.16.0
+
 ## 4.17.1
 
 Upgrade Digital Marketplace Frontend to v3.15.3

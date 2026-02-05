@@ -1,10 +1,11 @@
 {% macro digitalmarketplaceOptionSelect(params) %}
 {%- from 'govuk_frontend_jinja/components/checkboxes/macro.html' import govukCheckboxes -%}
+{%- from 'govuk_frontend_jinja/components/radios/macro.html' import govukRadios -%}
 
 {% set titleId = "option-select-title-" + params.name %}
 {% set closedOnLoad = True if params.closedOnLoad %}
 
-<div 
+<div
     class="dm-option-select"
     data-module="dm-option-select"
     {% if params.closedOnLoad %} data-closed-on-load="true" {% endif %}
@@ -18,18 +19,33 @@
 
     <div role="group" aria-labelledby="{{ titleId }}" class="dm-option-select__container js-options-container" id="{{ params.optionsContainerId }}" tabindex="-1">
       <div class="dm-option-select__container-inner js-auto-height-inner">
-      {{ govukCheckboxes({
-        "idPrefix": params.name,
-        "name": params.name,
-        "classes": "govuk-checkboxes--small",
-        "fieldset": {
-          "legend": {
-            "html": params.title,
-            "classes": "govuk-visually-hidden"
-          }
-        },
-        "items": params['items']
-      })}}
+      {% if params.useRadios %}
+        {{ govukRadios({
+          "idPrefix": params.name,
+          "name": params.name,
+          "classes": "govuk-radios--small",
+          "fieldset": {
+            "legend": {
+              "html": params.title,
+              "classes": "govuk-visually-hidden"
+            }
+          },
+          "items": params['items']
+        }) }}
+      {% else %}
+        {{ govukCheckboxes({
+          "idPrefix": params.name,
+          "name": params.name,
+          "classes": "govuk-checkboxes--small",
+          "fieldset": {
+            "legend": {
+              "html": params.title,
+              "classes": "govuk-visually-hidden"
+            }
+          },
+          "items": params['items']
+        }) }}
+      {% endif %}
       </div>
     </div>
 </div>
