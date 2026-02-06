@@ -19,7 +19,7 @@
 
     <div role="group" aria-labelledby="{{ titleId }}" class="dm-option-select__container js-options-container" id="{{ params.optionsContainerId }}" tabindex="-1">
       <div class="dm-option-select__container-inner js-auto-height-inner">
-      {% if params.useRadios %}
+      {% if params.filter_type == 'radios' %}
         {{ govukRadios({
           "idPrefix": params.name,
           "name": params.name,
