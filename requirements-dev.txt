@@ -59,7 +59,7 @@ flask-session==0.8.0
     # via ccs-digitalmarketplace-utils
 flask-wtf==1.2.2
     # via ccs-digitalmarketplace-utils
-govuk-frontend-jinja==3.10.0
+govuk-frontend-jinja==4.0.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
 identify==2.6.16
     # via pre-commit
