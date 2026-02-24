@@ -38,7 +38,7 @@ distlib==0.4.0
     # via virtualenv
 docopt==0.6.2
     # via notifications-python-client
-filelock==3.24.2
+filelock==3.24.3
     # via virtualenv
 filetype==1.2.0
     # via ccs-digitalmarketplace-utils
