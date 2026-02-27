@@ -88,13 +88,13 @@ class Test404:
 
         assert (
             body[1].xpath('./a')[0].get('href')
-            == 'mailto:cloud_digital@crowncommercial.gov.uk?subject=Digital%20Marketplace%20feedback'
+            == 'mailto:cloud_digital@gca.gov.uk?subject=Digital%20Marketplace%20feedback'
         )
-        assert body[1].xpath('./a')[0].get('title') == 'Please send feedback to cloud_digital@crowncommercial.gov.uk'
+        assert body[1].xpath('./a')[0].get('title') == 'Please send feedback to cloud_digital@gca.gov.uk'
 
         assert (
             body[1].text_content().strip()
-            == 'If you can’t find what you’re looking for, contact us at cloud_digital@crowncommercial.gov.uk'
+            == 'If you can’t find what you’re looking for, contact us at cloud_digital@gca.gov.uk'
         )
 
 
@@ -119,13 +119,13 @@ class Test410:
 
         assert (
             body[1].xpath('./a')[0].get('href')
-            == 'mailto:cloud_digital@crowncommercial.gov.uk?subject=Digital%20Marketplace%20page%20gone'
+            == 'mailto:cloud_digital@gca.gov.uk?subject=Digital%20Marketplace%20page%20gone'
         )
-        assert body[1].xpath('./a')[0].get('title') == 'Please send feedback to cloud_digital@crowncommercial.gov.uk'
+        assert body[1].xpath('./a')[0].get('title') == 'Please send feedback to cloud_digital@gca.gov.uk'
 
         assert (
             body[1].text_content().strip()
-            == "If you can't find what you're looking for, email cloud_digital@crowncommercial.gov.uk"
+            == "If you can't find what you're looking for, email cloud_digital@gca.gov.uk"
         )
 
 
