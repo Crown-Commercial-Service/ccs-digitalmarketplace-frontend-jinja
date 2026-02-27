@@ -4,6 +4,11 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
+## 5.0.0
+
+Upgrade Digital Marketplace Frontend to v4.0.0-beta.0
+Update references of CCS to GCA
+
 ## 4.20.0
 
 Implements text search box for narrowing down checkbox filters if there are more than 5
