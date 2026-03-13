@@ -24,8 +24,12 @@
             "text": 'About Government Digital Services'
             },
             {
-            "href": url_for('external.suppliers_list_by_prefix'),
+            "href": url_for('external.suppliers_list_by_prefix', framework_family='g-cloud'),
             "text": 'G-Cloud supplier A to Z'
+            },
+            {
+            "href": url_for('external.suppliers_list_by_prefix', framework_family='digital-outcomes-and-specialists'),
+            "text": 'Digital Outcomes and Specialists supplier A to Z'
             }
         ]
         },
