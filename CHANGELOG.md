@@ -4,6 +4,12 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
+## 4.19.0
+
+Upgrades Digital Marketplace Frontend to v3.17.0
+Upgrades Digital Marketplace Utils to 80.0.0
+Updates the footer macro to acomodate slug based URL generation for external.suppliers_list_by_prefix
+
 ## 4.18.3
 
 Upgrade Digital Marketplace Frontend to v3.16.3
