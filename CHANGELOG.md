@@ -4,6 +4,10 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
+## 5.0.0.rc3
+
+Updates the text of one of the links in footer.
+
 ## 5.0.0.rc2
 
 Upgrade Digital Marketplace Frontend to v4.0.0-beta.1
