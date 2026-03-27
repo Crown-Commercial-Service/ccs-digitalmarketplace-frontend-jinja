@@ -23,8 +23,9 @@
         <svg version="1.1" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" class="dm-option-select__icon dm-option-select__icon--down" aria-hidden="true" focusable="false"><path d="m225.84 414.16l256 256c16.683 16.683 43.691 16.683 60.331 0l256-256c16.683-16.683 16.683-43.691 0-60.331s-43.691-16.683-60.331 0l-225.84 225.84-225.84-225.84c-16.683-16.683-43.691-16.683-60.331 0s-16.683 43.691 0 60.331z"/></svg>
       </h2>
 
-      <div role="group" aria-labelledby="{{ titleId }}" class="dm-option-select__container js-options-container" id="{{ params.optionsContainerId }}" tabindex="-1">
+      <div role="group" aria-labelledby="{{ titleId }}" class="dm-option-select__container {{ "dm-option-select__container--filter" if params['items']|length > 5 }} js-options-container" id="{{ params.optionsContainerId }}" tabindex="-1">
         <div class="dm-option-select__container-inner js-auto-height-inner">
+
         {% if params.filter_type == 'radios' %}
           {% set name = params['items'][0]['name'] %}
 
@@ -41,6 +42,15 @@
             "items": params['items']
           }) }}
         {% else %}
+          {% if params['items']|length > 5 %}
+            <div class="dm-option-select__filter js-dm-filter-options">
+                <div class="govuk-form-group">
+                <label class="govuk-label govuk-visually-hidden" for="input-filter-{{ params.name }}">Filter {{ params.title }}</label>
+                  <input class="govuk-input" id="input-filter-{{ params.name }}" name="input-filter-{{ params.name }}" type="search">
+                </div>
+            </div>
+          {% endif %}
+
           {{ govukCheckboxes({
             "idPrefix": params.name,
             "name": params.name,

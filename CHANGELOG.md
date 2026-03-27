@@ -4,6 +4,11 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
+## 4.20.0
+
+Implements text search box for narrowing down checkbox filters if there are more than 5
+Adds the relevant style changes
+
 ## 4.19.0
 
 Upgrades Digital Marketplace Frontend to v3.17.0
