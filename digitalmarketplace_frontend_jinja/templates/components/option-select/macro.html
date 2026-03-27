@@ -44,8 +44,10 @@
         {% else %}
           {% if params['items']|length > 5 %}
             <div class="dm-option-select__filter js-dm-filter-options">
-              <input class="govuk-input" id="input-filter-{{ params.name }}" name="filter-{{ params.name }}" type="text"
-                     aria-describedby="selected-count-{{ params.name }}">
+                <div class="govuk-form-group">
+                <label class="govuk-label govuk-visually-hidden" for="input-filter-{{ params.name }}">Filter {{ params.title }}</label>
+                  <input class="govuk-input" id="input-filter-{{ params.name }}" name="input-filter-{{ params.name }}" type="search">
+                </div>
             </div>
           {% endif %}
 
