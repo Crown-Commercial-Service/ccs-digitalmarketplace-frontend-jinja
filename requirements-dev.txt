@@ -157,7 +157,7 @@ urllib3==2.6.3
     #   requests
 virtualenv==21.2.0
     # via pre-commit
-werkzeug==3.1.6
+werkzeug==3.1.7
     # via
     #   ccs-digitalmarketplace-utils
     #   flask
