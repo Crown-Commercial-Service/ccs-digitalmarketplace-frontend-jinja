@@ -16,6 +16,7 @@ The following table shows the version of Digital Marketplace Frontend Jinja that
 
 | Digital Marketplace Frontend Jinja Version                                                                      | Target CCS Digital Marketplace GOV.UK Frontend Version                                                           |
 |-----------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| [5.0.0](https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-frontend-jinja/releases/tag/5.0.0) | [4.0.1](https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-govuk-frontend/releases/tag/v4.0.1) |
 | [4.20.0](https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-frontend-jinja/releases/tag/4.20.0) | [3.18.1](https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-govuk-frontend/releases/tag/v3.18.1) |
 | [4.19.0](https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-frontend-jinja/releases/tag/4.19.0) | [3.17.0](https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-govuk-frontend/releases/tag/v3.17.0) |
 | [4.18.3](https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-frontend-jinja/releases/tag/4.18.3) | [3.16.3](https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-govuk-frontend/releases/tag/v3.16.3) |

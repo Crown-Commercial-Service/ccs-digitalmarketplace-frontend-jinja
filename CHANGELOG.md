@@ -4,9 +4,9 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
-## 5.0.0.rc2
+## 5.0.0
 
-Upgrade Digital Marketplace Frontend to v4.0.0-beta.1
+Upgrade Digital Marketplace Frontend to v4.0.1
 Update references of CCS to GCA
 
 ## 4.20.0
