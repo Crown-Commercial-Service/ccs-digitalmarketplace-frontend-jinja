@@ -6,9 +6,9 @@
 #
 blinker==1.9.0
     # via flask
-boto3==1.42.91
+boto3==1.42.96
     # via ccs-digitalmarketplace-utils
-botocore==1.42.91
+botocore==1.42.96
     # via
     #   boto3
     #   s3transfer
@@ -142,7 +142,7 @@ requests==2.33.1
     #   notifications-python-client
 ruff==0.15.11
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
-s3transfer==0.16.0
+s3transfer==0.16.1
     # via boto3
 six==1.17.0
     # via python-dateutil
