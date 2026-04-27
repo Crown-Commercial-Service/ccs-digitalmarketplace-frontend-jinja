@@ -94,7 +94,7 @@ markupsafe==3.0.3
     #   jinja2
     #   werkzeug
     #   wtforms
-msgspec==0.20.0
+msgspec==0.21.1
     # via flask-session
 mypy==1.20.1
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
