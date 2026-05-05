@@ -108,7 +108,7 @@ odfpy==1.4.1
     # via ccs-digitalmarketplace-utils
 packaging==26.2
     # via pytest
-pathspec==1.0.4
+pathspec==1.1.1
     # via mypy
 platformdirs==4.9.6
     # via virtualenv
