@@ -114,7 +114,7 @@ platformdirs==4.9.6
     # via virtualenv
 pluggy==1.6.0
     # via pytest
-pre-commit==4.5.1
+pre-commit==4.6.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
 pycparser==3.0
     # via cffi
