@@ -164,7 +164,7 @@ werkzeug==3.1.8
     #   flask-login
 workdays==1.4
     # via ccs-digitalmarketplace-utils
-wtforms==3.2.1
+wtforms==3.2.2
     # via flask-wtf
 xmldiff==2.7.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
