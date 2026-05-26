@@ -120,7 +120,7 @@ pycparser==3.0
     # via cffi
 pygments==2.20.0
     # via pytest
-pyjwt==2.12.1
+pyjwt==2.13.0
     # via notifications-python-client
 pytest==9.0.3
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
