@@ -140,7 +140,7 @@ pytz==2026.2
     # via ccs-digitalmarketplace-utils
 pyyaml==6.0.3
     # via pre-commit
-redis==7.4.0
+redis==8.0.0
     # via ccs-digitalmarketplace-utils
 requests==2.34.2
     # via
