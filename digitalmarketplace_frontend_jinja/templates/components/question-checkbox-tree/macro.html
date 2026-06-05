@@ -50,7 +50,7 @@
     <div class="dm-checkbox-tree-details__text">
       {% if section.options[0].options %}
         {% for option in section.options %}
-          {{ checkboxTreeDetail(option, index + (loop.index | string)) }}
+          {{ checkboxTreeDetail(option, "{}-{}".format(index, loop.index | string)) }}
         {% endfor %}
       {% else %}
         {{ checkboxTreeCheckboxes(section, index) }}
