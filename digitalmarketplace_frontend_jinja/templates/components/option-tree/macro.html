@@ -1,0 +1,88 @@
+{% macro digitalmarketplaceOptionTree(params) %}
+{%- from 'govuk_frontend_jinja/components/fieldset/macro.html' import govukFieldset -%}
+{%- from 'govuk_frontend_jinja/components/hint/macro.html' import govukHint -%}
+{%- from 'govuk_frontend_jinja/components/checkboxes/macro.html' import govukCheckboxes -%}
+{% set name = params.filter_settings.name %}
+{% set label = params.filter_settings.label %}
+{% set hint = params.filter_settings.hint %}
+{% set itemNameSingular = params.filter_settings.item_name.singular if params.filter_settings.item_name else "item" %}
+{% set itemNamePlural = params.filter_settings.item_name.plural if params.filter_settings.item_name else "items" %}
+{% set tierRestriction = params.filter_settings.tier_restriction or 0 %}
+
+{% macro checkboxTreeCheckboxes(item, index) %}
+  {{ govukCheckboxes({
+    "name": name,
+    "idPrefix": "input-{}-{}".format(name, index),
+    "items": item['items'],
+    "classes": "govuk-checkboxes--small"
+  }) }}
+{% endmacro %}
+
+{% macro checkboxTreeDetail(item, index) %}
+  {% set itemId = "input-{}-{}-summary".format(name, index) %}
+  {% set hasCheckbox = (index.split('-') | length) >= tierRestriction %}
+
+  <details id="details-{{ index }}" class="dm-option-tree-details">
+    <summary class="dm-option-tree-details__summary{% if hasCheckbox %} dm-option-tree-details__summary-checkbox{% endif %}">
+      <div class="dm-option-tree-details__summary-text">
+        <div class="dm-option-tree-details__summary-text-label">
+          {% if hasCheckbox %}
+            <div class="govuk-checkboxes__item govuk-checkboxes--small">
+              <input class="govuk-checkboxes__input" id="{{ itemId }}" type="checkbox">
+              <label class="govuk-label govuk-checkboxes__label" for="{{ itemId }}">
+                {{ item.text }}
+              </label>
+            </div>
+          {% else %}
+            {{ item.text }}
+          {% endif %}
+        </div>
+      </div>
+    </summary>
+    <div class="dm-option-tree-details__text">
+      {% if 'items' in item and 'items' in item['items'][0] %}
+        {% for sub_item in item['items'] %}
+          {{ checkboxTreeDetail(sub_item, '{}-{}'.format(index, loop.index | string)) }}
+        {% endfor %}
+      {% else %}
+        {{ checkboxTreeCheckboxes(item, index) }}
+      {% endif %}
+    </div>
+  </details>
+{% endmacro %}
+
+{% call govukFieldset({
+  "legend": {
+    "html": label,
+    "classes": "govuk-fieldset__legend--s"
+  },
+  "classes": 'dm-option-tree',
+  "attributes": {
+    'data-module': 'dm-option-tree',
+    'aria-describedby': "input-{}-hint".format(name) if hint,
+    'data-item-name-singular': itemNameSingular,
+    'data-item-name-plural': itemNamePlural,
+    'data-tier-restriction': tierRestriction
+  }
+}) %}
+  {% if hint %}
+    {{ govukHint({
+      "id": "input-{}-hint".format(name),
+      "text": hint
+    }) }}
+  {% endif %}
+
+  <div class="dm-option-tree__summary">
+    <p class="dm-option-tree__summary-total govuk-body">
+      <strong class="dm-option-tree__summary-total-selected"></strong>
+      <span class="dm-option-tree__summary-total-selected-text"></span>
+    </p>
+  </div>
+
+  <div  id="{{ name }}-options-tree" class="dm-option-tree__options">
+    {% for item in params['items'] %}
+      {{ checkboxTreeDetail(item, loop.index | string) }}
+    {% endfor %}
+  </div>
+{% endcall %}
+{% endmacro %}
