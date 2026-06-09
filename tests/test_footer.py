@@ -73,9 +73,7 @@ class TestFooterSupplierLinks:
         assert 'Digital Outcomes and Specialists supplier A to Z' not in html
 
     def test_renders_dos_supplier_link_when_dos_is_live(self, client):
-        html = render_footer(
-            client, get_footer_example('with Digital Outcomes and Specialists supplier A to Z link')
-        )
+        html = render_footer(client, get_footer_example('with Digital Outcomes and Specialists supplier A to Z link'))
 
         assert 'Digital Outcomes and Specialists supplier A to Z' in html
         assert '/digital-outcomes-and-specialists/suppliers' in html
