@@ -1,37 +1,40 @@
 {% macro digitalmarketplaceFooter(params) %}
 {%- from 'govuk_frontend_jinja/components/footer/macro.html' import govukFooter -%}
 
+{% set footer_live_frameworks = params.get('live_frameworks', none)
+    or params.get('live_frameworks_list', none)
+    or (live_frameworks_list | default([])) %}
+{% set ns = namespace(about_items=[
+    {
+    "href": 'https://www.gca.gov.uk/contact',
+    "text": 'Contact'
+    },
+    {
+    "href": 'https://www.gov.uk/guidance/digital-marketplace-buyers-guide',
+    "text": 'Services you can buy'
+    },
+    {
+    "href": 'https://www.gov.uk/government/organisations/crown-commercial-service',
+    "text": 'About Government Commercial Agency'
+    },
+    {
+    "href": 'https://www.gov.uk/government/organisations/government-digital-service',
+    "text": 'About Government Digital Services'
+    },
+]) %}
+{% for framework in footer_live_frameworks %}
+  {% set _ = ns.about_items.append({
+    "href": url_for('external.suppliers_list_by_prefix', framework_slug=framework['slug']),
+    "text": framework['name'] ~ ' supplier A to Z'
+  }) %}
+{% endfor %}
+
 {{ govukFooter({
     "navigation": [
         {
         "title": 'About Digital Marketplace',
         "width": "one-half",
-        "items": [
-            {
-            "href": 'https://www.gca.gov.uk/contact',
-            "text": 'Contact'
-            },
-            {
-            "href": 'https://www.gov.uk/guidance/digital-marketplace-buyers-guide',
-            "text": 'Services you can buy'
-            },
-            {
-            "href": 'https://www.gov.uk/government/organisations/crown-commercial-service',
-            "text": 'About Government Commercial Agency'
-            },
-            {
-            "href": 'https://www.gov.uk/government/organisations/government-digital-service',
-            "text": 'About Government Digital Services'
-            },
-            {
-            "href": url_for('external.suppliers_list_by_prefix', framework_family='g-cloud'),
-            "text": 'G-Cloud supplier A to Z'
-            },
-            {
-            "href": url_for('external.suppliers_list_by_prefix', framework_family='digital-outcomes-and-specialists'),
-            "text": 'Digital Outcomes and Specialists supplier A to Z'
-            }
-        ]
+        "items": ns.about_items
         },
         {
         "title": 'Guidance for using Digital Marketplace',

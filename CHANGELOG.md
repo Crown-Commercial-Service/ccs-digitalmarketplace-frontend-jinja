@@ -2,7 +2,12 @@
 
 Records breaking changes from major version bumps.
 
-## Unreleased
+## 5.2.0
+
+- Upgrade Digital Marketplace Frontend to v4.2.0
+- Footer shows dynamic supplier A to Z links for each live framework
+- Use `framework_slug` for supplier list URLs (aligned with utils 80.2.0)
+- Read live frameworks from `live_frameworks_list` (utils context) or `live_frameworks` (param)
 
 ## 5.1.0
 
