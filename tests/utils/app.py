@@ -115,19 +115,6 @@ def create_app():
             """
         )
 
-    @app.post('/component/<string:component>/with-context')
-    def component_with_context(component: str) -> Any:
-        data: Any = request.get_json()
-        params = data.get('params', {})
-        return render_template_string(
-            f"""
-            {{% from "digitalmarketplace_frontend_jinja/components/{component}/macro.html" import digitalmarketplace{data['macro_name']} with context %}}
-            {{{{ digitalmarketplace{data['macro_name']}(params) }}}}
-            """,
-            params=params,
-            **data.get('context', {}),
-        )
-
     @app.post('/layout/<string:layout>')
     def layout(layout: str) -> Any:
         data: Any = request.get_json()
