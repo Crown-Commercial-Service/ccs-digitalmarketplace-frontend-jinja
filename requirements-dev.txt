@@ -174,7 +174,7 @@ workdays==1.4
     # via ccs-digitalmarketplace-utils
 wtforms==3.2.2
     # via flask-wtf
-xmldiff==2.7.0
+xmldiff==3.0
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
 
 # The following packages are considered to be unsafe in a requirements file:
