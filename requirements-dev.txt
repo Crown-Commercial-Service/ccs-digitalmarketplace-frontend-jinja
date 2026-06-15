@@ -132,7 +132,7 @@ pytest==9.0.3
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
 python-dateutil==2.9.0.post0
     # via botocore
-python-discovery==1.4.0
+python-discovery==1.4.2
     # via virtualenv
 python-json-logger==4.1.0
     # via ccs-digitalmarketplace-utils
