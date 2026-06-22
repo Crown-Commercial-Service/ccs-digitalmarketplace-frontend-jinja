@@ -148,7 +148,7 @@ requests==2.34.2
     #   ccs-digitalmarketplace-utils
     #   mailchimp3
     #   notifications-python-client
-ruff==0.15.17
+ruff==0.15.18
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
 s3transfer==0.18.0
     # via boto3
