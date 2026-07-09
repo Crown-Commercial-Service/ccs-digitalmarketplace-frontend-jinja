@@ -8,6 +8,7 @@
 {% set itemNameSingular = params.filter_settings.item_name.singular if params.filter_settings.item_name else "item" %}
 {% set itemNamePlural = params.filter_settings.item_name.plural if params.filter_settings.item_name else "items" %}
 {% set tierRestriction = params.filter_settings.tier_restriction or 0 %}
+{% set independentSelection = params.filter_settings.independent_selection or false %}
 
 {% macro checkboxTreeCheckboxes(item, index) %}
   {{ govukCheckboxes({
@@ -28,7 +29,7 @@
         <div class="dm-option-tree-details__summary-text-label">
           {% if hasCheckbox %}
             <div class="govuk-checkboxes__item govuk-checkboxes--small">
-              <input class="govuk-checkboxes__input" id="{{ itemId }}" type="checkbox">
+              <input class="govuk-checkboxes__input" id="{{ itemId }}" type="checkbox"{% if independentSelection %} name="{{ name }}" value="{{ item.value }}"{% if item.checked %} checked{% endif %}{% endif %}>
               <label class="govuk-label govuk-checkboxes__label" for="{{ itemId }}">
                 {{ item.text }}
               </label>
@@ -62,7 +63,8 @@
     'aria-describedby': "input-{}-hint".format(name) if hint,
     'data-item-name-singular': itemNameSingular,
     'data-item-name-plural': itemNamePlural,
-    'data-tier-restriction': tierRestriction
+    'data-tier-restriction': tierRestriction,
+    'data-independent-selection': "true" if independentSelection else "false"
   }
 }) %}
   {% if hint %}
