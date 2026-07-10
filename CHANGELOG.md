@@ -2,6 +2,11 @@
 
 Records breaking changes from major version bumps.
 
+## 5.3.0
+
+- Upgrade Digital Marketplace Frontend to v4.3.0
+- Option-tree macro supports the `independent_selection` filter setting: section checkboxes render as form inputs in their own right and the component carries `data-independent-selection`
+
 ## 5.2.0
 
 - Upgrade Digital Marketplace Frontend to v4.2.0
