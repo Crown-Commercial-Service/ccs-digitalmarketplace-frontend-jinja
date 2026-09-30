@@ -1,0 +1,24 @@
+{% macro digitalmarketplaceLotDividerRow(params) %}
+<div
+    class="dm-lot-divider-row{%- if params.classes %} {{ params.classes }}{% endif %}"
+    {%- for attribute in (params.attributes | default({}) | dictsort) %} {{attribute[0]}}="{{attribute[1]}}"{% endfor %}
+>
+  {#- Normalise the number once, so the derived text below can never read
+      "for lot undefined" to a screen reader. The null guard is load-bearing:
+      a lot number can arrive null from an API and `| string` throws on null,
+      which would take the whole page down. `| string` itself is what keeps a
+      literal 0 truthy. -#}
+  {%- set lotNumber = ("" if params.number is none else params.number) | default("") | string %}
+  {%- set visuallyHiddenPrefix = params.visuallyHiddenPrefix | default("Lot") %}
+  {%- set derivedActionText = ("for lot " ~ lotNumber) if lotNumber else "" %}
+  <span class="dm-lot-divider-row__number">{% if visuallyHiddenPrefix and lotNumber %}<span class="govuk-visually-hidden">{{ visuallyHiddenPrefix }} </span>{% endif %}{{ lotNumber }}</span>
+  {%- if params.actions | length %}
+    <span class="dm-lot-divider-row__actions">
+      {%- for action in params.actions %}
+        {%- set actionVisuallyHiddenText = action.visuallyHiddenText | default(derivedActionText) %}
+        <a class="dm-lot-divider-row__link govuk-link" href="{{ action.href }}">{{ action.text }}{% if actionVisuallyHiddenText %}<span class="govuk-visually-hidden"> {{ actionVisuallyHiddenText }}</span>{% endif %}</a>
+      {%- endfor %}
+    </span>
+  {%- endif %}
+</div>
+{% endmacro %}
