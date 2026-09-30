@@ -2,6 +2,10 @@
 
 Records breaking changes from major version bumps.
 
+## 5.4.0
+
+- Option-tree macro supports the `single_selection_tier` filter setting and carries `data-single-selection-tier`, defaulting to `tier_restriction`; an explicit 0 means no sibling restriction at all
+
 ## 5.3.0
 
 - Upgrade Digital Marketplace Frontend to v4.3.0

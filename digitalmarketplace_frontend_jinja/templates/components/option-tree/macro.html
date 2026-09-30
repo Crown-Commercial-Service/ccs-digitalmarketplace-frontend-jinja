@@ -8,6 +8,7 @@
 {% set itemNameSingular = params.filter_settings.item_name.singular if params.filter_settings.item_name else "item" %}
 {% set itemNamePlural = params.filter_settings.item_name.plural if params.filter_settings.item_name else "items" %}
 {% set tierRestriction = params.filter_settings.tier_restriction or 0 %}
+{% set singleSelectionTier = params.filter_settings.single_selection_tier if params.filter_settings.single_selection_tier is defined else tierRestriction %}
 {% set independentSelection = params.filter_settings.independent_selection or false %}
 
 {% macro checkboxTreeCheckboxes(item, index) %}
@@ -64,6 +65,7 @@
     'data-item-name-singular': itemNameSingular,
     'data-item-name-plural': itemNamePlural,
     'data-tier-restriction': tierRestriction,
+    'data-single-selection-tier': singleSelectionTier,
     'data-independent-selection': "true" if independentSelection else "false"
   }
 }) %}
