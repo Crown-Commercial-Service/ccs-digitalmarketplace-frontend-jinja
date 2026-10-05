@@ -24,33 +24,38 @@
   {% set itemId = "input-{}-{}-summary".format(name, index) %}
   {% set hasCheckbox = (index.split('-') | length) >= tierRestriction %}
 
-  <details id="details-{{ index }}" class="dm-option-tree-details">
-    <summary class="dm-option-tree-details__summary{% if hasCheckbox %} dm-option-tree-details__summary-checkbox{% endif %}">
-      <div class="dm-option-tree-details__summary-text">
-        <div class="dm-option-tree-details__summary-text-label">
-          {% if hasCheckbox %}
-            <div class="govuk-checkboxes__item govuk-checkboxes--small">
-              <input class="govuk-checkboxes__input" id="{{ itemId }}" type="checkbox"{% if independentSelection %} name="{{ name }}" value="{{ item.value }}"{% if item.checked %} checked{% endif %}{% endif %}>
-              <label class="govuk-label govuk-checkboxes__label" for="{{ itemId }}">
-                {{ item.text }}
-              </label>
-            </div>
-          {% else %}
-            {{ item.text }}
-          {% endif %}
-        </div>
+  <div class="dm-option-tree-section">
+    {% if hasCheckbox %}
+      <div class="govuk-checkboxes__item govuk-checkboxes--small dm-option-tree-section__checkbox">
+        <input class="govuk-checkboxes__input" id="{{ itemId }}" type="checkbox"{% if independentSelection %} name="{{ name }}" value="{{ item.value }}"{% if item.checked %} checked{% endif %}{% endif %}>
+        <label class="govuk-label govuk-checkboxes__label" for="{{ itemId }}">
+          {{ item.text }}
+        </label>
       </div>
-    </summary>
-    <div class="dm-option-tree-details__text">
-      {% if 'items' in item and 'items' in item['items'][0] %}
-        {% for sub_item in item['items'] %}
-          {{ checkboxTreeDetail(sub_item, '{}-{}'.format(index, loop.index | string)) }}
-        {% endfor %}
-      {% else %}
-        {{ checkboxTreeCheckboxes(item, index) }}
-      {% endif %}
-    </div>
-  </details>
+    {% endif %}
+    <details id="details-{{ index }}" class="dm-option-tree-details">
+      <summary class="dm-option-tree-details__summary{% if hasCheckbox %} dm-option-tree-details__summary-checkbox{% endif %}">
+        {% if hasCheckbox %}
+          <span class="govuk-visually-hidden">Options under {{ item.text }}</span>
+        {% else %}
+          <div class="dm-option-tree-details__summary-text">
+            <div class="dm-option-tree-details__summary-text-label">
+              {{ item.text }}
+            </div>
+          </div>
+        {% endif %}
+      </summary>
+      <div class="dm-option-tree-details__text">
+        {% if 'items' in item and 'items' in item['items'][0] %}
+          {% for sub_item in item['items'] %}
+            {{ checkboxTreeDetail(sub_item, '{}-{}'.format(index, loop.index | string)) }}
+          {% endfor %}
+        {% else %}
+          {{ checkboxTreeCheckboxes(item, index) }}
+        {% endif %}
+      </div>
+    </details>
+  </div>
 {% endmacro %}
 
 {% call govukFieldset({
