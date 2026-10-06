@@ -2,6 +2,11 @@
 
 Records breaking changes from major version bumps.
 
+## 5.4.1
+
+- Upgrade Digital Marketplace Frontend to v4.3.8
+- Option-tree macro renders each section in `.dm-option-tree-section`, with its checkbox beside the `<details>` rather than inside the `<summary>`, so one interactive control is no longer nested in another (WCAG 4.1.2)
+
 ## 5.4.0
 
 - Upgrade Digital Marketplace Frontend to v4.3.7
